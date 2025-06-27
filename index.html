@@ -142,6 +142,14 @@
                     title="Chat com Agente de IA sobre Histórico Profissional de Lincoln">
                 </iframe>
             </div>
+            <div class="w-full max-w-4xl mx-auto mt-8 p-6 bg-white rounded-2xl shadow-lg text-left">
+                <p class="text-sm text-slate-600 mb-2" data-i18n-key="disclaimer_llm_accuracy">
+                    **Disclaimer sobre a IA:** Este assistente é um modelo de linguagem e, embora provido com somente o histórico profissional de Lincoln K. Frota e configurado para ser factual, pode, ocasionalmente, gerar informações imprecisas ou não corroboradas. Para detalhes completos e endossados, por favor, consulte o currículo em PDF ou o próprio profissional.
+                </p>
+                <p class="text-sm text-slate-600" data-i18n-key="disclaimer_data_privacy">
+                    **Privacidade de Dados:** Caso você opte por fornecer seus dados de contato através deste chat, eles serão utilizados somente por Lincoln K. Frota estritamente para o propósito de retorno ao seu contato. Ele não armazenará ou compartilhará seus dados para quaisquer outras finalidades.
+                </p>
+            </div>
         </section>
 
     </main>
@@ -177,6 +185,8 @@
                 'contact_email_title': 'E-mail',
                 'chat_section_title': '🤖 Converse com meu Histórico Profissional',
                 'chat_section_intro': 'Para uma exploração interativa da minha carreira, desenvolvi um agente de IA. Você pode perguntar sobre experiências específicas, projetos, habilidades técnicas e histórias profissionais. O chat abaixo é uma forma direta de obter respostas detalhadas e personalizadas com base em todo o meu histórico. Caso ele não saiba a resposta, deixe seu nome e contato que ele me informará da sua pergunta e eu terei o maior prazer em responder.',
+                'disclaimer_llm_accuracy': '**Disclaimer sobre a IA:** Este assistente é um modelo de linguagem e, embora provido com somente o histórico profissional de Lincoln K. Frota e configurado para ser factual, pode, ocasionalmente, gerar informações imprecisas ou não corroboradas. Para detalhes completos e endossados, por favor, consulte o currículo em PDF ou o próprio profissional.',
+                'disclaimer_data_privacy': '**Privacidade de Dados:** Caso você opte por fornecer seus dados de contato através deste chat, eles serão utilizados somente por Lincoln K. Frota estritamente para o propósito de retorno ao seu contato. Ele não armazenará ou compartilhará seus dados para quaisquer outras finalidades.',
                 'footer_copyright': '&copy; 2025 Lincoln K. Frota. Todos os direitos reservados.',
                 'footer_desc': 'Página interativa desenvolvida para apresentação profissional.',
                 'iframe_title': 'Chat com Agente de IA sobre Histórico Profissional de Lincoln'
@@ -203,6 +213,8 @@
                 'contact_email_title': 'Email',
                 'chat_section_title': '🤖 Chat with my Professional History',
                 'chat_section_intro': 'For an interactive exploration of my career, I developed an AI agent. You can ask about specific experiences, projects, technical skills, and professional stories. The chat below is a direct way to get detailed and personalized answers based on my entire history. If it doesn\'t know the answer, leave your name and contact and it will inform me of your question, and I will be happy to answer.',
+                'disclaimer_llm_accuracy': '**AI Disclaimer:** This assistant is a language model, and while provided with only Lincoln K. Frota\'s professional history and configured to be factual, it may occasionally generate inaccurate or uncorroborated information. For complete and endorsed details, please refer to the PDF resume or the professional himself.',
+                'disclaimer_data_privacy': '**Data Privacy:** Should you choose to provide your contact details through this chat, they will be used solely by Lincoln K. Frota strictly for the purpose of returning your contact. He will not store or share your data for any other purposes.',
                 'footer_copyright': '&copy; 2025 Lincoln K. Frota. All rights reserved.',
                 'footer_desc': 'Interactive page developed for professional presentation.',
                 'iframe_title': 'Chat with AI Agent about Lincoln\'s Professional History'
@@ -253,7 +265,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            window.scrollTo(0, 0);
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+            }, 50);
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const navLinks = document.querySelectorAll('#mobile-menu a, header nav a:not(#language-toggle):not(#language-toggle-mobile)');
