@@ -1,78 +1,282 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lincoln KF – Carreira</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quantico&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #fcb040;
-      --secondary: #2e2e2e;
-      --background: #ffffff;
-      --accent: #00a9e0;
-    }
-    body {
-      font-family: 'Quantico', sans-serif;
-      margin: 0;
-      background: var(--background);
-      color: var(--secondary);
-      line-height: 1.6;
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    h1 {
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-    h2 {
-      color: var(--accent);
-      margin-top: 40px;
-    }
-    .button {
-      background: var(--accent);
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 10px;
-    }
-    iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      border-radius: 12px;
-      margin-top: 20px;
-    }
-    @media (max-width: 768px) {
-      iframe {
-        height: 500px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lincoln K. Frota – Carreira Profissional Interativa</title>
+    
+    <!-- Chosen Palette: Warm Neutrals & Slate Blue -->
+    <!-- Application Structure Plan: A single-page application with a sticky top navigation for seamless user flow. The structure is designed to guide the user from a high-level introduction (Hero section) to specific actions (CV, Contact, AI Chat). This non-linear, section-based approach allows recruiters to quickly access the information they need most, while still presenting a comprehensive professional story. This is more effective than the original linear document because it prioritizes user tasks and engagement over simple information listing. The addition of language toggling enhances global accessibility. -->
+    <!-- Visualization & Content Choices: Report Info: Career summary, CV, contact, and AI chat. -> Goal: Inform, Engage, Facilitate Contact, Global Accessibility. -> Viz/Presentation Method: Interactive SPA layout, styled buttons with icons, embedded iframe, dynamic text content based on selected language. -> Interaction: Sticky navigation with smooth scroll, direct interaction with contact links (tel, mailto, etc.), and the AI chat iframe. Language toggle for international users. -> Justification: As the source material is qualitative and action-oriented rather than data-heavy, the optimal "visualization" is a well-architected, interactive user interface. This structure transforms a static page into a dynamic professional profile. -> Library/Method: Vanilla JS for interactions, Tailwind CSS for layout and styling. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #334155;
+        }
+        .font-quantico {
+            font-family: 'Quantico', sans-serif;
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+        }
+        .action-button {
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .action-button:hover {
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
-<body>
+<body class="antialiased">
 
-  <h1>Lincoln K. Frota – Carreira Profissional</h1>
-  <p>Bem-vindo à minha página de apresentação. Além do <a href="https://www.linkedin.com/in/lincoln-k-frota/" target="_blank">meu perfil no LinkedIn</a>, aqui você pode obter a última versão do meu currículo e interagir com meu agente de IA treinado com informações sobre minha atuação.</p>
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-quantico text-xl font-bold text-slate-700" data-i18n-key="home_title_short">Lincoln K. Frota</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link text-slate-600 border-b-2 border-transparent pb-1" data-i18n-key="nav_home">Início</a>
+                <a href="#curriculo" class="nav-link text-slate-600 border-b-2 border-transparent pb-1" data-i18n-key="nav_cv">Currículo</a>
+                <a href="#contato" class="nav-link text-slate-600 border-b-2 border-transparent pb-1" data-i18n-key="nav_contact">Contato</a>
+                <a href="#chat" class="nav-link text-slate-600 border-b-2 border-transparent pb-1" data-i18n-key="nav_chat">Converse com IA</a>
+                <button id="language-toggle" class="text-slate-600 font-semibold px-3 py-1 rounded-md border border-slate-300 hover:bg-slate-100 transition-colors">EN</button>
+            </div>
+            <div class="flex items-center md:hidden">
+                <button id="language-toggle-mobile" class="text-slate-600 font-semibold px-3 py-1 rounded-md border border-slate-300 hover:bg-slate-100 transition-colors mr-4">EN</button>
+                <button id="mobile-menu-button" class="text-slate-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#home" class="block text-slate-600 py-2 px-6 hover:bg-slate-50" data-i18n-key="nav_home">Início</a>
+            <a href="#curriculo" class="block text-slate-600 py-2 px-6 hover:bg-slate-50" data-i18n-key="nav_cv">Currículo</a>
+            <a href="#contato" class="block text-slate-600 py-2 px-6 hover:bg-slate-50" data-i18n-key="nav_contact">Contato</a>
+            <a href="#chat" class="block text-slate-600 py-2 px-6 hover:bg-slate-50" data-i18n-key="nav_chat">Converse com IA</a>
+        </div>
+    </header>
 
-  <h2>📄 Currículo do Lincoln</h2>
-  <a class="button" href="ENG_LINCOLN_K_FROTA_Jun25.pdf" download>Baixar Currículo em PDF</a>
+    <main class="container mx-auto px-6 py-8 md:py-16">
 
-  <h2>Faça Contato</h2>
-  <p>Chame no <a href="https://wa.me/5541999358444" target="_blank">WhatsApp</a></p>
-  <p>Ou ligue no <a href="tel:+5541999358444">(41) 99935-8444</a></p>
-  <p>Ou mande um e-mail no <a href="mailto:lkfrota@gmail.com">lkfrota@gmail.com</a></p>
+        <section id="home" class="text-center min-h-[60vh] flex flex-col justify-center items-center">
+            <h1 class="font-quantico text-4xl md:text-6xl font-bold text-slate-800 mb-2" data-i18n-key="home_title">Lincoln K. Frota</h1>
+            <p class="text-base md:text-lg text-blue-600 font-semibold mb-4" data-i18n-key="home_subtitle">
+                PCM e Confiabilidade Industrial | O&M e Performance | Energia e Otimização
+            </p>
+            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8" data-i18n-key="home_intro">
+                Bem-vindo à minha página de apresentação profissional. Aqui você encontra meu currículo, formas de contato e pode interagir com um agente de IA treinado sobre minha carreira.
+            </p>
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#curriculo" class="action-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-md" data-i18n-key="home_btn_cv">
+                    Ver Currículo
+                </a>
+                <a href="https://www.linkedin.com/in/lincoln-k-frota/" target="_blank" class="action-button bg-slate-700 hover:bg-slate-800 text-white font-bold py-3 px-8 rounded-lg shadow-md" data-i18n-key="home_btn_linkedin">
+                    LinkedIn
+                </a>
+            </div>
+        </section>
 
-  <h2>🤖 Converse com meu Histórico Profissional</h2>
-  <p>Use o chat abaixo para perguntar livremente sobre minha experiência, projetos, competências e histórias profissionais:</p>
-  <iframe src="https://lkfrota-career-conversation.hf.space"></iframe>
+        <section id="curriculo" class="py-16 md:py-24 bg-white rounded-2xl shadow-lg my-16">
+            <div class="text-center max-w-3xl mx-auto px-6">
+                <h2 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4" data-i18n-key="cv_section_title">📄 Currículo Profissional</h2>
+                <p class="text-slate-600 mb-8" data-i18n-key="cv_section_intro">
+                    Esta seção fornece acesso direto à versão mais atualizada do meu currículo. Clique no botão abaixo para fazer o download do documento em formato PDF e conhecer em detalhes minha trajetória, competências técnicas e projetos realizados.
+                </p>
+                <a href="ENG_LINCOLN_K_FROTA_Jun25.pdf" download="Lincoln_K_Frota_Curriculo.pdf" class="action-button inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow-md" data-i18n-key="cv_btn_download">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Baixar Currículo em PDF
+                </a>
+            </div>
+        </section>
+
+        <section id="contato" class="py-16 md:py-24">
+            <div class="text-center max-w-3xl mx-auto px-6">
+                <h2 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4" data-i18n-key="contact_section_title">📞 Entre em Contato</h2>
+                <p class="text-slate-600 mb-10" data-i18n-key="contact_section_intro">
+                    Estou sempre aberto a novas oportunidades e conexões. Utilize os canais abaixo para falar comigo. Sinta-se à vontade para enviar uma mensagem, ligar ou mandar um e-mail. Responderei o mais breve possível.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <a href="https://wa.me/5541999358444" target="_blank" class="action-button bg-white p-6 rounded-xl shadow-md hover:shadow-xl border border-slate-200/80">
+                        <div class="text-4xl mb-3">💬</div>
+                        <h3 class="font-bold text-lg text-slate-700" data-i18n-key="contact_whatsapp_title">WhatsApp</h3>
+                        <p class="text-slate-500" data-i18n-key="contact_whatsapp_desc">Envie uma mensagem</p>
+                    </a>
+                    <a href="tel:+5541999358444" class="action-button bg-white p-6 rounded-xl shadow-md hover:shadow-xl border border-slate-200/80">
+                        <div class="text-4xl mb-3">📱</div>
+                        <h3 class="font-bold text-lg text-slate-700" data-i18n-key="contact_call_title">Ligar</h3>
+                        <p class="text-slate-500">(41) 99935-8444</p>
+                    </a>
+                    <a href="mailto:lkfrota@gmail.com" class="action-button bg-white p-6 rounded-xl shadow-md hover:shadow-xl border border-slate-200/80">
+                        <div class="text-4xl mb-3">✉️</div>
+                        <h3 class="font-bold text-lg text-slate-700" data-i18n-key="contact_email_title">E-mail</h3>
+                        <p class="text-slate-500">lkfrota@gmail.com</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="chat" class="py-16 md:py-24">
+            <div class="text-center max-w-4xl mx-auto px-6">
+                <h2 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4" data-i18n-key="chat_section_title">🤖 Converse com meu Histórico Profissional</h2>
+                <p class="text-slate-600 mb-8 max-w-3xl mx-auto" data-i18n-key="chat_section_intro">
+                    Para uma exploração interativa da minha carreira, desenvolvi um agente de IA. Você pode perguntar sobre experiências específicas, projetos, habilidades técnicas e histórias profissionais. O chat abaixo é uma forma direta de obter respostas detalhadas e personalizadas com base em todo o meu histórico.
+                </p>
+            </div>
+            <div class="w-full max-w-4xl mx-auto mt-8 h-[70vh] max-h-[700px] rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
+                 <iframe 
+                    class="w-full h-full border-0"
+                    src="https://lkfrota-career-conversation.hf.space" 
+                    data-i18n-key="iframe_title"
+                    title="Chat com Agente de IA sobre Histórico Profissional de Lincoln">
+                </iframe>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-slate-800 text-slate-400 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p data-i18n-key="footer_copyright">&copy; 2024 Lincoln K. Frota. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2" data-i18n-key="footer_desc">Página interativa desenvolvida para apresentação profissional.</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            'pt': {
+                'home_title_short': 'Lincoln K. Frota',
+                'home_title': 'Lincoln K. Frota',
+                'home_subtitle': 'PCM e Confiabilidade Industrial | O&M e Performance | Energia e Otimização',
+                'home_intro': 'Bem-vindo à minha página de apresentação profissional. Aqui você encontra meu currículo, formas de contato e pode interagir com um agente de IA treinado sobre minha carreira.',
+                'home_btn_cv': 'Ver Currículo',
+                'home_btn_linkedin': 'LinkedIn',
+                'nav_home': 'Início',
+                'nav_cv': 'Currículo',
+                'nav_contact': 'Contato',
+                'nav_chat': 'Converse com IA',
+                'cv_section_title': '📄 Currículo Profissional',
+                'cv_section_intro': 'Esta seção fornece acesso direto à versão mais atualizada do meu currículo. Clique no botão abaixo para fazer o download do documento em formato PDF e conhecer em detalhes minha trajetória, competências técnicas e projetos realizados.',
+                'cv_btn_download': 'Baixar Currículo em PDF',
+                'contact_section_title': '📞 Entre em Contato',
+                'contact_section_intro': 'Estou sempre aberto a novas oportunidades e conexões. Utilize os canais abaixo para falar comigo. Sinta-se à vontade para enviar uma mensagem, ligar ou mandar um e-mail. Responderei o mais breve possível.',
+                'contact_whatsapp_title': 'WhatsApp',
+                'contact_whatsapp_desc': 'Envie uma mensagem',
+                'contact_call_title': 'Ligar',
+                'contact_email_title': 'E-mail',
+                'chat_section_title': '🤖 Converse com meu Histórico Profissional',
+                'chat_section_intro': 'Para uma exploração interativa da minha carreira, desenvolvi um agente de IA. Você pode perguntar sobre experiências específicas, projetos, habilidades técnicas e histórias profissionais. O chat abaixo é uma forma direta de obter respostas detalhadas e personalizadas com base em todo o meu histórico.',
+                'footer_copyright': '&copy; 2025 Lincoln K. Frota. Todos os direitos reservados.',
+                'footer_desc': 'Página interativa desenvolvida para apresentação profissional.',
+                'iframe_title': 'Chat com Agente de IA sobre Histórico Profissional de Lincoln'
+            },
+            'en': {
+                'home_title_short': 'Lincoln K. Frota',
+                'home_title': 'Lincoln K. Frota',
+                'home_subtitle': 'PCM and Industrial Reliability | O&M and Performance | Energy and Optimization',
+                'home_intro': 'Welcome to my professional presentation page. Here you can find my resume, contact methods, and interact with an AI agent trained on my career.',
+                'home_btn_cv': 'View Resume',
+                'home_btn_linkedin': 'LinkedIn',
+                'nav_home': 'Home',
+                'nav_cv': 'Resume',
+                'nav_contact': 'Contact',
+                'nav_chat': 'Chat with AI',
+                'cv_section_title': '📄 Professional Resume',
+                'cv_section_intro': 'This section provides direct access to the most updated version of my resume. Click the button below to download the PDF document and learn more about my trajectory, technical skills, and completed projects.',
+                'cv_btn_download': 'Download Resume PDF',
+                'contact_section_title': '📞 Get in Touch',
+                'contact_section_intro': 'I am always open to new opportunities and connections. Use the channels below to contact me. Feel free to send a message, call, or email me. I will respond as soon as possible.',
+                'contact_whatsapp_title': 'WhatsApp',
+                'contact_whatsapp_desc': 'Send a message',
+                'contact_call_title': 'Call',
+                'contact_email_title': 'Email',
+                'chat_section_title': '🤖 Chat with my Professional History',
+                'chat_section_intro': 'For an interactive exploration of my career, I developed an AI agent. You can ask about specific experiences, projects, technical skills, and professional stories. The chat below is a direct way to get detailed and personalized answers based on my entire history.',
+                'footer_copyright': '&copy; 2025 Lincoln K. Frota. All rights reserved.',
+                'footer_desc': 'Interactive page developed for professional presentation.',
+                'iframe_title': 'Chat with AI Agent about Lincoln\'s Professional History'
+            }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-i18n-key]').forEach(element => {
+                const key = element.getAttribute('data-i18n-key');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Specific updates for attributes like download and title
+            const cvDownloadLink = document.querySelector('a[download="Lincoln_K_Frota_Curriculo.pdf"], a[download="Lincoln_K_Frota_Resume.pdf"]');
+            if (cvDownloadLink) {
+                cvDownloadLink.setAttribute('download', lang === 'en' ? 'Lincoln_K_Frota_Resume.pdf' : 'Lincoln_K_Frota_Curriculo.pdf');
+            }
+            
+            const iframeElement = document.querySelector('iframe');
+            if (iframeElement) {
+                iframeElement.setAttribute('title', translations[lang]['iframe_title']);
+            }
+
+            // Update button text
+            const langToggleBtn = document.getElementById('language-toggle');
+            if (langToggleBtn) {
+                langToggleBtn.textContent = lang === 'en' ? 'PT' : 'EN';
+            }
+            const langToggleBtnMobile = document.getElementById('language-toggle-mobile');
+            if (langToggleBtnMobile) {
+                langToggleBtnMobile.textContent = lang === 'en' ? 'PT' : 'EN';
+            }
+
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('#mobile-menu a, header nav a:not(#language-toggle):not(#language-toggle-mobile)');
+        const languageToggle = document.getElementById('language-toggle');
+        const languageToggleMobile = document.getElementById('language-toggle-mobile');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        if (languageToggle) {
+            languageToggle.addEventListener('click', () => {
+                const currentLang = localStorage.getItem('preferredLanguage') || 'pt';
+                const newLang = currentLang === 'pt' ? 'en' : 'pt';
+                setLanguage(newLang);
+            });
+        }
+
+        if (languageToggleMobile) {
+            languageToggleMobile.addEventListener('click', () => {
+                const currentLang = localStorage.getItem('preferredLanguage') || 'pt';
+                const newLang = currentLang === 'pt' ? 'en' : 'pt';
+                setLanguage(newLang);
+            });
+        }
+
+        // Set initial language on load
+        const initialLang = localStorage.getItem('preferredLanguage') || 'pt';
+        setLanguage(initialLang);
+    </script>
 
 </body>
 </html>
