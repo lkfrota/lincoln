@@ -37,6 +37,15 @@
         .action-button:hover {
             transform: translateY(-2px);
         }
+        #home {
+            scroll-margin-top: 0;
+        }
+        #contato {
+            scroll-margin-top: 5rem;
+        }
+        #chat {
+            scroll-margin-top: 1rem;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -80,14 +89,13 @@
             <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8" data-i18n-key="home_intro">
                 Bem-vindo à minha página de apresentação profissional. Para conhecer minha trajetória, competências e projetos, faça o download do meu currículo acima.
             </p>
-            <!-- Nova frase estimulante para o chatbot -->
             <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-4" data-i18n-key="home_chat_call_to_action">
                 Faça uma entrevista imediata com meu Agente de IA, ele pode consultar meu histórico completo e responder suas perguntas!
             </p>
             <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
                 <a href="#chat" class="action-button inline-flex items-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-10 rounded-lg shadow-lg text-xl" data-i18n-key="chat_btn_home">
                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.244-1.106l-.424.093-.306.079C6.012 18.006 5 18 5 18v-2.308c0-.496-.134-.96-.37-1.385A9 9 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                    Entreviste meu histórico
+                    Entreviste meu Histórico
                 </a>
             </div>
             <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8" data-i18n-key="home_cv_summary">
@@ -169,7 +177,7 @@
                 'home_subtitle': 'Especialista PCM, Engenheiro de Performance e Confiabilidade Industrial',
                 'home_intro': 'Bem-vindo à minha página de apresentação profissional. Para conhecer minha trajetória, competências e projetos, faça o download do meu currículo acima.',
                 'cv_btn_download_home': 'Baixar Currículo em PDF',
-                'chat_btn_home': 'Converse com minha IA',
+                'chat_btn_home': 'Entreviste meu Histórico',
                 'home_chat_call_to_action': 'Faça uma entrevista imediata com meu Agente de IA, ele pode consultar meu histórico completo e responder suas perguntas!',
                 'home_cv_summary': 'Com cerca de 20 anos de experiência em operações nas indústrias de manufatura, energia solar e óleo e gás, atuo como Engenheiro de Performance e Confiabilidade Industrial e Especialista em PCM. Minhas realizações incluem a melhoria de processos que resultaram em alta disponibilidade e redução de falhas, liderança na estruturação de operações e inovação em projetos de campo. Sou reconhecido pela minha abordagem analítica e capacidade de transformar desafios em resultados tangíveis, utilizando análises de dados e agora também inteligência artificial.',
                 'home_linkedin_call': 'Saiba ainda mais no LinkedIn',
@@ -197,7 +205,7 @@
                 'home_subtitle': 'Maintenance Specialist, Performance and Industrial Reliability Engineer',
                 'home_intro': 'Welcome to my professional presentation page. To learn about my career, skills, and projects, download my resume above.',
                 'cv_btn_download_home': 'Download Resume PDF',
-                'chat_btn_home': 'Chat with my AI',
+                'chat_btn_home': 'Interview my History',
                 'home_chat_call_to_action': 'Have an immediate interview with my AI Agent; it can consult my complete history and answer your questions!',
                 'home_cv_summary': 'With nearly 20 years of experience in operations across manufacturing, solar energy, and oil & gas industries, I serve as a Performance and Industrial Reliability Engineer and Maintenance Specialist. My achievements include process improvements resulting in high availability and fault reduction, leading operational structuring and innovation in field projects. I am recognized for my analytical approach and ability to transform challenges into tangible results, leveraging data analysis and now also artificial intelligence.',
                 'home_linkedin_call': 'Learn more on LinkedIn',
@@ -267,7 +275,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 window.scrollTo(0, 0);
-            }, 300);
+                document.body.focus();
+                document.documentElement.focus();
+            }, 500); 
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const navLinks = document.querySelectorAll('#mobile-menu a, header nav a:not(#language-toggle):not(#language-toggle-mobile)');
