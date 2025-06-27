@@ -46,7 +46,6 @@
             <a href="#" class="font-quantico text-xl font-bold text-slate-700" data-i18n-key="home_title_short">Lincoln K. Frota</a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#home" class="nav-link text-slate-600 border-b-2 border-transparent pb-1" data-i18n-key="nav_home">Início</a>
-                <a href="#curriculo" class="nav-link text-slate-600 border-b-2 border-transparent pb-1" data-i18n-key="nav_cv">Currículo</a>
                 <a href="#contato" class="nav-link text-slate-600 border-b-2 border-transparent pb-1" data-i18n-key="nav_contact">Contato</a>
                 <a href="#chat" class="nav-link text-slate-600 border-b-2 border-transparent pb-1" data-i18n-key="nav_chat">Converse com IA</a>
                 <button id="language-toggle" class="text-slate-600 font-semibold px-3 py-1 rounded-md border border-slate-300 hover:bg-slate-100 transition-colors">EN</button>
@@ -60,7 +59,6 @@
         </nav>
         <div id="mobile-menu" class="hidden md:hidden bg-white">
             <a href="#home" class="block text-slate-600 py-2 px-6 hover:bg-slate-50" data-i18n-key="nav_home">Início</a>
-            <a href="#curriculo" class="block text-slate-600 py-2 px-6 hover:bg-slate-50" data-i18n-key="nav_cv">Currículo</a>
             <a href="#contato" class="block text-slate-600 py-2 px-6 hover:bg-slate-50" data-i18n-key="nav_contact">Contato</a>
             <a href="#chat" class="block text-slate-600 py-2 px-6 hover:bg-slate-50" data-i18n-key="nav_chat">Converse com IA</a>
         </div>
@@ -73,29 +71,32 @@
             <p class="text-base md:text-lg text-blue-600 font-semibold mb-4" data-i18n-key="home_subtitle">
                 Especialista PCM, Engenheiro de Performance e Confiabilidade Industrial
             </p>
-            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8" data-i18n-key="home_intro">
-                Bem-vindo à minha página de apresentação profissional. Para conhecer minha trajetória, competências e projetos, faça o download do meu currículo completo abaixo.
-            </p>
-            <div class="flex justify-center">
-                 <a href="ENG_LINCOLN_K_FROTA_Jun25.pdf" download="Lincoln_K_Frota_Curriculo.pdf" class="action-button inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-10 rounded-lg shadow-lg text-xl" data-i18n-key="cv_btn_download_home">
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+                 <a href="ENG_LINCOLN_K_FROTA.pdf" download="ENG_LINCOLN_K_FROTA.pdf" class="action-button inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-10 rounded-lg shadow-lg text-xl" data-i18n-key="cv_btn_download_home">
                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     Baixar Currículo em PDF
                 </a>
             </div>
-        </section>
-
-        <section id="curriculo" class="py-16 md:py-24 bg-white rounded-2xl shadow-lg my-16">
-            <div class="text-center max-w-3xl mx-auto px-6">
-                <h2 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4" data-i18n-key="cv_section_title">📄 Sobre meu Currículo</h2>
-                <p class="text-slate-600 mb-8 leading-relaxed" data-i18n-key="cv_section_intro_details">
-                    Com cerca de 20 anos de experiência em operações nas indústrias de manufatura, energia solar e óleo e gás, atuo como Engenheiro de Performance e Confiabilidade Industrial e Especialista em PCM. Minhas realizações abrangem otimização de processos com ganhos de disponibilidade e redução de falhas. Lidero a estruturação de operações e inovações em projetos, aplicando análises de dados e inteligência artificial. Sou reconhecido por transformar desafios em resultados tangíveis e coordenar equipes multidisciplinares com foco em eficiência.
-                </p>
-                <p class="text-slate-600 mt-8 mb-4" data-i18n-key="cv_linkedin_call">
-                    Saiba ainda mais sobre minha trajetória e conexões profissionais em:
-                </p>
-                <a href="https://www.linkedin.com/in/lincoln-k-frota/" target="_blank" class="action-button inline-flex items-center bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-lg shadow-md">
+            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8" data-i18n-key="home_intro">
+                Bem-vindo à minha página de apresentação profissional. Para conhecer minha trajetória, competências e projetos, faça o download do meu currículo acima.
+            </p>
+            <!-- Nova frase estimulante para o chatbot -->
+            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-4" data-i18n-key="home_chat_call_to_action">
+                Faça uma entrevista imediata com meu Agente de IA, ele pode conversar com meu histórico completo e responder suas perguntas!
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+                <a href="#chat" class="action-button inline-flex items-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-10 rounded-lg shadow-lg text-xl" data-i18n-key="chat_btn_home">
+                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.244-1.106l-.424.093-.306.079C6.012 18.006 5 18 5 18v-2.308c0-.496-.134-.96-.37-1.385A9 9 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                    Converse com minha IA
+                </a>
+            </div>
+            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8" data-i18n-key="home_cv_summary">
+                Com cerca de 20 anos de experiência em operações nas indústrias de manufatura, energia solar e óleo e gás, atuo como Engenheiro de Performance e Confiabilidade Industrial e Especialista em PCM. Minhas realizações incluem a melhoria de processos que resultaram em alta disponibilidade e redução de falhas, liderança na estruturação de operações e inovação em projetos de campo. Sou reconhecido pela minha abordagem analítica e capacidade de transformar desafios em resultados tangíveis, utilizando análises de dados e agora também inteligência artificial.
+            </p>
+            <div class="flex justify-center">
+                <a href="https://www.linkedin.com/in/lincoln-k-frota/" target="_blank" class="action-button inline-flex items-center bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-lg shadow-md" data-i18n-key="home_linkedin_call">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
-                    LinkedIn
+                    Saiba ainda mais no LinkedIn
                 </a>
             </div>
         </section>
@@ -115,7 +116,7 @@
                     <a href="tel:+5541999358444" class="action-button bg-white p-6 rounded-xl shadow-md hover:shadow-xl border border-slate-200/80">
                         <div class="text-4xl mb-3">📱</div>
                         <h3 class="font-bold text-lg text-slate-700" data-i18n-key="contact_call_title">Ligar</h3>
-                        <p class="text-slate-500">(41) 99935-8444</p>
+                        <p class="text-slate-500" data-i18n-key="contact_call_desc">(41) 99935-8444</p>
                     </a>
                     <a href="mailto:lkfrota@gmail.com" class="action-button bg-white p-6 rounded-xl shadow-md hover:shadow-xl border border-slate-200/80">
                         <div class="text-4xl mb-3">✉️</div>
@@ -130,7 +131,7 @@
             <div class="text-center max-w-4xl mx-auto px-6">
                 <h2 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4" data-i18n-key="chat_section_title">🤖 Converse com meu Histórico Profissional</h2>
                 <p class="text-slate-600 mb-8 max-w-3xl mx-auto" data-i18n-key="chat_section_intro">
-                    Para uma exploração interativa da minha carreira, desenvolvi um agente de IA. Você pode perguntar sobre experiências específicas, projetos, habilidades técnicas e histórias profissionais. O chat abaixo é uma forma direta de obter respostas detalhadas e personalizadas com base em todo o meu histórico.
+                    Para uma exploração interativa da minha carreira, desenvolvi um agente de IA. Você pode perguntar sobre experiências específicas, projetos, habilidades técnicas e histórias profissionais. O chat abaixo é uma forma direta de obter respostas detalhadas e personalizadas com base em todo o meu histórico. Caso ele não saiba a resposta, deixe seu nome e contato que ele me informará da sua pergunta e eu terei o maior prazer em responder.
                 </p>
             </div>
             <div class="w-full max-w-4xl mx-auto mt-8 h-[70vh] max-h-[700px] rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
@@ -158,23 +159,24 @@
                 'home_title_short': 'Lincoln K. Frota',
                 'home_title': 'Lincoln K. Frota',
                 'home_subtitle': 'Especialista PCM, Engenheiro de Performance e Confiabilidade Industrial',
-                'home_intro': 'Bem-vindo à minha página de apresentação profissional. Para conhecer minha trajetória, competências e projetos, faça o download do meu currículo completo abaixo.',
+                'home_intro': 'Bem-vindo à minha página de apresentação profissional. Para conhecer minha trajetória, competências e projetos, faça o download do meu currículo acima.',
                 'cv_btn_download_home': 'Baixar Currículo em PDF',
+                'chat_btn_home': 'Converse com minha IA',
+                'home_chat_call_to_action': 'Faça uma entrevista imediata com meu Agente de IA, ele pode conversar com meu histórico completo e responder suas perguntas!',
+                'home_cv_summary': 'Com cerca de 20 anos de experiência em operações nas indústrias de manufatura, energia solar e óleo e gás, atuo como Engenheiro de Performance e Confiabilidade Industrial e Especialista em PCM. Minhas realizações incluem a melhoria de processos que resultaram em alta disponibilidade e redução de falhas, liderança na estruturação de operações e inovação em projetos de campo. Sou reconhecido pela minha abordagem analítica e capacidade de transformar desafios em resultados tangíveis, utilizando análises de dados e agora também inteligência artificial.',
+                'home_linkedin_call': 'Saiba ainda mais no LinkedIn',
                 'nav_home': 'Início',
-                'nav_cv': 'Currículo',
                 'nav_contact': 'Contato',
                 'nav_chat': 'Converse com IA',
-                'cv_section_title': '📄 Sobre meu Currículo',
-                'cv_section_intro_details': 'Com cerca de 20 anos de experiência em operações nas indústrias de manufatura, energia solar e óleo e gás, atuo como Engenheiro de Performance e Confiabilidade Industrial e Especialista em PCM. Minhas realizações incluem a otimização de processos que resultaram em alta disponibilidade e redução de falhas, liderança na estruturação de operações e inovação em projetos de campo. Sou reconhecido pela minha abordagem analítica e capacidade de transformar desafios em resultados tangíveis, utilizando metodologias como RCA, FMEA e Six Sigma. Possuo expertise em gestão de ativos, análise de falhas e coordenação de equipes multidisciplinares.',
-                'cv_linkedin_call': 'Saiba ainda mais sobre minha trajetória e conexões profissionais em:',
                 'contact_section_title': '📞 Entre em Contato',
                 'contact_section_intro': 'Estou sempre aberto a novas oportunidades e conexões. Utilize os canais abaixo para falar comigo. Sinta-se à vontade para enviar uma mensagem, ligar ou mandar um e-mail. Responderei o mais breve possível.',
                 'contact_whatsapp_title': 'WhatsApp',
                 'contact_whatsapp_desc': 'Envie uma mensagem',
                 'contact_call_title': 'Ligar',
+                'contact_call_desc': '(41) 99935-8444',
                 'contact_email_title': 'E-mail',
                 'chat_section_title': '🤖 Converse com meu Histórico Profissional',
-                'chat_section_intro': 'Para uma exploração interativa da minha carreira, desenvolvi um agente de IA. Você pode perguntar sobre experiências específicas, projetos, habilidades técnicas e histórias profissionais. O chat abaixo é uma forma direta de obter respostas detalhadas e personalizadas com base em todo o meu histórico.',
+                'chat_section_intro': 'Para uma exploração interativa da minha carreira, desenvolvi um agente de IA. Você pode perguntar sobre experiências específicas, projetos, habilidades técnicas e histórias profissionais. O chat abaixo é uma forma direta de obter respostas detalhadas e personalizadas com base em todo o meu histórico. Caso ele não saiba a resposta, deixe seu nome e contato que ele me informará da sua pergunta e eu terei o maior prazer em responder.',
                 'footer_copyright': '&copy; 2025 Lincoln K. Frota. Todos os direitos reservados.',
                 'footer_desc': 'Página interativa desenvolvida para apresentação profissional.',
                 'iframe_title': 'Chat com Agente de IA sobre Histórico Profissional de Lincoln'
@@ -182,24 +184,25 @@
             'en': {
                 'home_title_short': 'Lincoln K. Frota',
                 'home_title': 'Lincoln K. Frota',
-                'home_subtitle': 'PCM Specialist, Performance and Industrial Reliability Engineer',
-                'home_intro': 'Welcome to my professional presentation page. To learn about my career, skills, and projects, download my complete resume below.',
+                'home_subtitle': 'Maintenance Specialist, Performance and Industrial Reliability Engineer',
+                'home_intro': 'Welcome to my professional presentation page. To learn about my career, skills, and projects, download my resume above.',
                 'cv_btn_download_home': 'Download Resume PDF',
+                'chat_btn_home': 'Chat with my AI',
+                'home_chat_call_to_action': 'Have an immediate interview with my AI Agent; it can chat with my complete history and answer your questions!',
+                'home_cv_summary': 'With nearly 20 years of experience in operations across manufacturing, solar energy, and oil & gas industries, I serve as a Performance and Industrial Reliability Engineer and Maintenance Specialist. My achievements include process improvements resulting in high availability and fault reduction, leading operational structuring and innovation in field projects. I am recognized for my analytical approach and ability to transform challenges into tangible results, leveraging data analysis and now also artificial intelligence.',
+                'home_linkedin_call': 'Learn more on LinkedIn',
                 'nav_home': 'Home',
-                'nav_cv': 'Resume',
                 'nav_contact': 'Contact',
                 'nav_chat': 'Chat with AI',
-                'cv_section_title': '📄 About my Resume',
-                'cv_section_intro_details': 'With nearly 20 years of experience in operations across manufacturing, solar energy, and oil & gas industries, I serve as a Performance and Industrial Reliability Engineer and PCM Specialist. My achievements include optimizing processes for high availability and fault reduction. I lead operational structuring and project innovations, applying data analysis and artificial intelligence. I am recognized for transforming challenges into tangible results and coordinating multidisciplinary teams with a focus on efficiency.',
-                'cv_linkedin_call': 'Learn even more about my career and professional connections on:',
                 'contact_section_title': '📞 Get in Touch',
                 'contact_section_intro': 'I am always open to new opportunities and connections. Use the channels below to contact me. Feel free to send a message, call, or email me. I will respond as soon as possible.',
                 'contact_whatsapp_title': 'WhatsApp',
                 'contact_whatsapp_desc': 'Send a message',
                 'contact_call_title': 'Call',
+                'contact_call_desc': '+55 (41) 99935-8444',
                 'contact_email_title': 'Email',
                 'chat_section_title': '🤖 Chat with my Professional History',
-                'chat_section_intro': 'For an interactive exploration of my career, I developed an AI agent. You can ask about specific experiences, projects, technical skills, and professional stories. The chat below is a direct way to get detailed and personalized answers based on my entire history.',
+                'chat_section_intro': 'For an interactive exploration of my career, I developed an AI agent. You can ask about specific experiences, projects, technical skills, and professional stories. The chat below is a direct way to get detailed and personalized answers based on my entire history. If it doesn\'t know the answer, leave your name and contact and it will inform me of your question, and I will be happy to answer.',
                 'footer_copyright': '&copy; 2025 Lincoln K. Frota. All rights reserved.',
                 'footer_desc': 'Interactive page developed for professional presentation.',
                 'iframe_title': 'Chat with AI Agent about Lincoln\'s Professional History'
@@ -214,15 +217,22 @@
                 }
             });
 
-            // Update specific text for the CV download button in the home section
             const cvDownloadButtonHome = document.querySelector('[data-i18n-key="cv_btn_download_home"]');
             if (cvDownloadButtonHome) {
                 cvDownloadButtonHome.innerHTML = `<svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>${translations[lang]['cv_btn_download_home']}`;
+                // Set the href for the CV download button dynamically based on language
+                if (lang === 'en') {
+                    cvDownloadButtonHome.setAttribute('href', 'ENG_LINCOLN_K_FROTA_EN.pdf');
+                    cvDownloadButtonHome.setAttribute('download', 'ENG_LINCOLN_K_FROTA_Resume.pdf');
+                } else {
+                    cvDownloadButtonHome.setAttribute('href', 'ENG_LINCOLN_K_FROTA.pdf');
+                    cvDownloadButtonHome.setAttribute('download', 'ENG_LINCOLN_K_FROTA.pdf');
+                }
             }
 
-            const cvDownloadLink = document.querySelector('a[download]');
-            if (cvDownloadLink) {
-                cvDownloadLink.setAttribute('download', lang === 'en' ? 'Lincoln_K_Frota_Resume.pdf' : 'Lincoln_K_Frota_Curriculo.pdf');
+            const chatButtonHome = document.querySelector('[data-i18n-key="chat_btn_home"]');
+            if (chatButtonHome) {
+                chatButtonHome.innerHTML = `<svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.244-1.106l-.424.093-.306.079C6.012 18.006 5 18 5 18v-2.308c0-.496-.134-.96-.37-1.385A9 9 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>${translations[lang]['chat_btn_home']}`;
             }
             
             const iframeElement = document.querySelector('iframe');
@@ -256,7 +266,13 @@
             }
             
             navLinks.forEach(link => {
-                link.addEventListener('click', () => {
+                link.addEventListener('click', (event) => {
+                    if (link.getAttribute('href').startsWith('#')) {
+                        event.preventDefault();
+                        document.querySelector(link.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                     if (!mobileMenu.classList.contains('hidden')) {
                         mobileMenu.classList.add('hidden');
                     }
