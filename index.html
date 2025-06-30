@@ -46,20 +46,7 @@
         #chat {
             scroll-margin-top: 1rem;
         }
-        /* Estilo para o botão de download flutuante */
-        #fixed-cv-button {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
-            pointer-events: none; /* Garante que o botão não seja clicável quando oculto */
-        }
-        #fixed-cv-button.show {
-            opacity: 1;
-            pointer-events: auto; /* Torna o botão clicável quando visível */
-        }
+        
     </style>
 </head>
 <body class="antialiased">
@@ -181,13 +168,7 @@
 
     <!-- Gradio Web Component Script -->
     <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/5.33.1/gradio.js"></script>
-
-    <!-- Botão de download do currículo fixo/flutuante -->
-    <a id="fixed-cv-button" href="ENG_LINCOLN_K_FROTA.pdf" download="ENG_LINCOLN_K_FROTA.pdf" class="action-button inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-xl text-lg">
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-        Baixar Currículo
-    </a>
-
+    
     <script>
         const translations = {
             'pt': {
@@ -216,8 +197,7 @@
                 'disclaimer_data_privacy': '**Privacidade de Dados:** Caso você opte por fornecer seus dados de contato através deste chat, eles serão utilizados somente por Lincoln K. Frota estritamente para o propósito de retorno ao seu contato. Ele não armazenará ou compartilhará seus dados para quaisquer outras finalidades.',
                 'footer_copyright': '&copy; 2025 Lincoln K. Frota. Todos os direitos reservados.',
                 'footer_desc': 'Página interativa desenvolvida para apresentação profissional.',
-                'iframe_title': 'Chat com Agente de IA sobre Histórico Profissional de Lincoln',
-                'fixed_cv_btn_text': 'Baixar Currículo' // Novo texto para o botão fixo
+                'iframe_title': 'Chat com Agente de IA sobre Histórico Profissional de Lincoln'
             },
             'en': {
                 'home_title_short': 'Lincoln K. Frota',
@@ -245,8 +225,7 @@
                 'disclaimer_data_privacy': '**Data Privacy:** Should you choose to provide your contact details through this chat, they will be used solely by Lincoln K. Frota strictly for the purpose of returning your contact. He will not store or share your data for any other purposes.',
                 'footer_copyright': '&copy; 2025 Lincoln K. Frota. All rights reserved.',
                 'footer_desc': 'Interactive page developed for professional presentation.',
-                'iframe_title': 'Chat with AI Agent about Lincoln\'s Professional History',
-                'fixed_cv_btn_text': 'Download Resume' // Novo texto para o botão fixo
+                'iframe_title': 'Chat with AI Agent about Lincoln\'s Professional History'
             }
         };
 
@@ -291,19 +270,6 @@
                 langToggleBtnMobile.textContent = lang === 'en' ? 'PT' : 'EN';
             }
 
-            // Atualiza o texto e link do botão CV fixo
-            const fixedCvButton = document.getElementById('fixed-cv-button');
-            if (fixedCvButton) {
-                fixedCvButton.innerHTML = `<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>${translations[lang]['fixed_cv_btn_text']}`;
-                if (lang === 'en') {
-                    fixedCvButton.setAttribute('href', 'ENG_LINCOLN_K_FROTA_EN.pdf');
-                    fixedCvButton.setAttribute('download', 'ENG_LINCOLN_K_FROTA_Resume.pdf'); // Ajustado para nome de download em inglês
-                } else {
-                    fixedCvButton.setAttribute('href', 'ENG_LINCOLN_K_FROTA.pdf');
-                    fixedCvButton.setAttribute('download', 'ENG_LINCOLN_K_FROTA.pdf'); // Ajustado para nome de download em português
-                }
-            }
-
             localStorage.setItem('preferredLanguage', lang);
         }
 
@@ -321,7 +287,6 @@
             const navLinks = document.querySelectorAll('#mobile-menu a, header nav a:not(#language-toggle):not(#language-toggle-mobile)');
             const languageToggle = document.getElementById('language-toggle');
             const languageToggleMobile = document.getElementById('language-toggle-mobile');
-            const fixedCvButton = document.getElementById('fixed-cv-button'); // Obtém a referência ao botão fixo
 
             if (mobileMenuButton) {
                 mobileMenuButton.addEventListener('click', () => {
@@ -356,17 +321,6 @@
                     const currentLang = localStorage.getItem('preferredLanguage') || 'pt';
                     const newLang = currentLang === 'pt' ? 'en' : 'pt';
                     setLanguage(newLang);
-                });
-            }
-
-            // Lógica para mostrar/esconder o botão CV fixo ao rolar
-            if (fixedCvButton) { // Garante que o botão existe antes de adicionar o listener
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 300) { // Mostra o botão após rolar 300px
-                        fixedCvButton.classList.add('show');
-                    } else {
-                        fixedCvButton.classList.remove('show');
-                    }
                 });
             }
 
