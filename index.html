@@ -46,7 +46,40 @@
         #chat {
             scroll-margin-top: 1rem;
         }
-        
+        /* Estilo para o botão WhatsApp fixo */
+        #fixed-whatsapp-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background-color: #25D366; /* Cor do WhatsApp */
+            color: white;
+            padding: 1rem;
+            border-radius: 9999px; /* Botão redondo */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease-in-out;
+            transform: scale(1);
+            width: 4rem; /* Tamanho fixo para o botão */
+            height: 4rem; /* Tamanho fixo para o botão */
+        }
+        #fixed-whatsapp-button:hover {
+            background-color: #1DA851; /* Tom mais escuro no hover */
+            transform: scale(1.05);
+        }
+        /* Oculta o texto do botão em telas muito pequenas para economizar espaço */
+        @media (max-width: 640px) { /* sm breakpoint */
+            #fixed-whatsapp-button span {
+                display: none;
+            }
+            #fixed-whatsapp-button {
+                width: 3.5rem; /* Tamanho fixo para o ícone */
+                height: 3.5rem;
+                padding: 0;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -166,6 +199,11 @@
         </div>
     </footer>
 
+    <!-- Botão WhatsApp Fixo -->
+    <a id="fixed-whatsapp-button" href="https://wa.me/5541999358444?text=Ol%C3%A1,%20visitei%20seu%20site%20de%20carreira%20e%20gostaria%20de%20conversar!" target="_blank" class="action-button">
+        <img src="uploaded:wa-logo.png-7a6f3c20-4d8f-4dff-9377-a4fe101e21ae" alt="Logo WhatsApp" class="w-10 h-10"> <!-- Seu ícone PNG -->
+    </a>
+
     <!-- Gradio Web Component Script -->
     <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/5.33.1/gradio.js"></script>
     
@@ -280,7 +318,7 @@
                 window.scrollTo(0, 0);
                 document.body.focus(); 
                 document.documentElement.focus(); 
-            }, 200); // Mantido 1000ms como na sua última tentativa de rolagem inicial
+            }, 200);
 
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
