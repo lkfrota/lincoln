@@ -235,7 +235,8 @@
                 'disclaimer_data_privacy': '**Privacidade de Dados:** Caso você opte por fornecer seus dados de contato através deste chat, eles serão utilizados somente por Lincoln K. Frota estritamente para o propósito de retorno ao seu contato. Ele não armazenará ou compartilhará seus dados para quaisquer outras finalidades.',
                 'footer_copyright': '&copy; 2025 Lincoln K. Frota. Todos os direitos reservados.',
                 'footer_desc': 'Página interativa desenvolvida para apresentação profissional.',
-                'iframe_title': 'Chat com Agente de IA sobre Histórico Profissional de Lincoln'
+                'iframe_title': 'Chat com Agente de IA sobre Histórico Profissional de Lincoln',
+                'whatsapp_message': 'Ol%C3%A1,%20visitei%20seu%20site%20de%20carreira%20e%20gostaria%20de%20conversar!'
             },
             'en': {
                 'home_title_short': 'Lincoln K. Frota',
@@ -263,7 +264,8 @@
                 'disclaimer_data_privacy': '**Data Privacy:** Should you choose to provide your contact details through this chat, they will be used solely by Lincoln K. Frota strictly for the purpose of returning your contact. He will not store or share your data for any other purposes.',
                 'footer_copyright': '&copy; 2025 Lincoln K. Frota. All rights reserved.',
                 'footer_desc': 'Interactive page developed for professional presentation.',
-                'iframe_title': 'Chat with AI Agent about Lincoln\'s Professional History'
+                'iframe_title': 'Chat with AI Agent about Lincoln\'s Professional History',
+                'whatsapp_message': 'Hello,%20I%20visited%20your%20career%20website%20and%20would%20like%20to%20chat!'
             }
         };
 
@@ -303,11 +305,21 @@
                 // Garante que o texto do botão LinkedIn seja atualizado
                 linkedinButton.innerHTML = `<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>${translations[lang]['home_linkedin_call']}`;
             }
-            
+
+            // Atualiza o link do WhatsApp na seção de contato
+            const whatsappContactButton = document.getElementById('whatsapp-contact-button');
+            if (whatsappContactButton) {
+                const phoneNumber = '5541999358444'; 
+                const encodedMessage = translations[lang]['whatsapp_message'];
+                whatsappContactButton.setAttribute('href', `https://wa.me/${phoneNumber}?text=${encodedMessage}`);
+            }
             // CORREÇÃO: Seleciona o gradio-app
             const gradioAppElement = document.querySelector('gradio-app'); 
             if (gradioAppElement) {
                 gradioAppElement.setAttribute('title', translations[lang]['iframe_title']);
+                // Força um re-render do iframe para resolver o problema da tela cinza
+                const currentSrc = gradioAppElement.getAttribute('src');
+                gradioAppElement.setAttribute('src', currentSrc); 
             }
 
             const langToggleBtn = document.getElementById('language-toggle');
