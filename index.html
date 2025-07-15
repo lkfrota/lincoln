@@ -337,11 +337,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Tenta forçar a rolagem para o topo após um atraso (1000ms na sua última tentativa)
             // Se o problema persistir, pode ser uma limitação do Web Component ou ambiente de visualização.
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-                document.body.focus(); 
-                document.documentElement.focus(); 
-            }, 200);
+            // setTimeout(() => {window.scrollTo(0, 0); document.body.focus(); document.documentElement.focus(); }, 200);
 
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
