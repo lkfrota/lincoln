@@ -177,7 +177,7 @@
                     Para uma exploração interativa da minha carreira, desenvolvi um agente de IA. Você pode perguntar sobre experiências específicas, projetos, habilidades técnicas e histórias profissionais. O chat abaixo é uma forma direta de obter respostas detalhadas e personalizadas com base em todo o meu histórico. Caso ele não saiba a resposta, deixe seu nome e contato que ele me informará da sua pergunta e eu terei o maior prazer em responder.
                 </p>
             </div>
-            <div class="w-full max-w-4xl mx-auto mt-8 h-[70vh] max-h-[700px] rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
+            <div class="w-full max-w-4xl mx-auto mt-8 h-[80vh] max-h-[900px] rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
                 <gradio-app src="https://lkfrota-career-conversation.hf.space" data-i18n-key="iframe_title" title="Entrevista com IA sobre Histórico Profissional de Lincoln"></gradio-app>
             </div>
             <div class="w-full max-w-4xl mx-auto mt-6 p-6 bg-white rounded-2xl shadow-lg text-left">
@@ -313,7 +313,14 @@
                 const encodedMessage = translations[lang]['whatsapp_message'];
                 whatsappContactButton.setAttribute('href', `https://wa.me/${phoneNumber}?text=${encodedMessage}`);
             }
-            // CORREÇÃO: Seleciona o gradio-app
+            // Atualiza o link do WhatsApp Fixo
+            const fixedWhatsappButton = document.getElementById('fixed-whatsapp-button');
+            if (fixedWhatsappButton) {
+                const phoneNumber = '5541999358444'; 
+                const encodedMessage = translations[lang]['whatsapp_message'];
+                fixedWhatsappButton.setAttribute('href', `https://wa.me/${phoneNumber}?text=${encodedMessage}`);
+            }
+            // CORREÇÃO: Seleciona o gradio-app <-- não está funcionando
             const gradioAppElement = document.querySelector('gradio-app'); 
             if (gradioAppElement) {
                 gradioAppElement.setAttribute('title', translations[lang]['iframe_title']);
