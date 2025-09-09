@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relatório GHI Paraná – Lincoln K. Frota</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #334155;
+        }
+        .font-quantico {
+            font-family: 'Quantico', sans-serif;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="font-quantico text-xl md:text-2xl font-bold text-slate-700">GD Fotovoltaica no Paraná</h1>
+            <span class="text-sm text-slate-500">por Lincoln K. Frota</span>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-16">
+
+        <section id="visualization" class="py-16 md:py-24">
+            <div class="text-center max-w-4xl mx-auto px-6">
+                <p class="text-slate-600 mb-8 max-w-3xl mx-auto">
+                    A análise de irradiância global horizontal (GHI) para o estado do Paraná é baseada em dados do modelo climático **ERA5** da **Oikolab**.
+                </p>
+            </div>
+            
+            <div class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
+                <figure class="m-0">
+                    <img src="PR_GHIrelAug2025.jpg" alt="Mapa de Irradiância GHI Relativa a média 2014-2024 no Paraná" class="w-full h-auto">
+                    <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
+                        Mapa da Irradiância Solar (GHI) no Paraná - Relativo a Média Longa.
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
+                <figure class="m-0">
+                    <img src="PR_GHI24Aug2025.jpg" alt="Mapa de Irradiância GHI Relativa a 2024 no Paraná" class="w-full h-auto">
+                    <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
+                        Irradiância Solar (GHI) no Paraná - Relativo ao Ano Passado.
+                    </figcaption>
+                </figure>
+            </div>
+            
+            <div class="text-center max-w-4xl mx-auto px-6 mt-16">
+                <h3 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4">Top 10 Cidades em Potência GD FV Instalada</h3>
+                <p class="text-slate-600 mb-8 max-w-3xl mx-auto">
+                    Este gráfico apresenta os 10 municípios paranaenses com maior potência instalada em geração distribuída fotovoltaica, com dados da ANEEL.
+                </p>
+            </div>
+            <div class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
+                <figure class="m-0">
+                    <img src="top10Ago.png" alt="Gráfico Top 10 Municípios Paraná Potência Instalada GD" class="w-full h-auto">
+                    <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
+                        Gráfico: Evolução 24 Meses Top 10 Municípios com Geração Distribuída no Paraná.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="about" class="py-16 md:py-24 max-w-3xl mx-auto">
+            <h3 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4">Sobre o Relatório</h3>
+            <p class="text-slate-600 text-lg mb-4">
+                Este relatório compila e analisa dados de Global Horizontal Irradiance (GHI) para o Paraná, oferecendo uma visão detalhada para o planejamento e otimização de projetos de energia solar fotovoltaica. Os dados de irradiância foram obtidos da plataforma **Oikolab**, utilizando o modelo climático **ERA5**, enquanto os dados de potência instalada por município são da Agência Nacional de Energia Elétrica (**ANEEL**).
+            </p>
+            <p class="text-slate-600 text-lg">
+                O GHI é um fator crítico para a estimativa de produção de energia, e esta análise visa fornecer informações precisas para engenheiros, projetistas e investidores, ajudando na tomada de decisões estratégicas e na avaliação de viabilidade técnica e econômica de projetos de geração distribuída.
+            </p>
+        </section>
+        
+        <section id="contact" class="py-16 md:py-24">
+            <div class="text-center max-w-3xl mx-auto px-6">
+                <h2 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4">📞 Entre em Contato</h2>
+                <p class="text-slate-600 mb-10">
+                    Gostou do relatório? Gostaria de discutir um projeto? Entre em contato comigo pelos canais abaixo.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <!-- Seus botões de contato aqui -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Lincoln K. Frota. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">Relatório GHI para Geração Distribuída.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
