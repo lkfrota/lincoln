@@ -58,6 +58,78 @@
 
       gtag('config', 'G-1VZWVH6B57');
     </script>
+    <script>
+    // URL da sua Cloud Function (API)
+    const GCF_ENDPOINT = 'https://gd-pr-report-547250988053.southamerica-east1.run.app/'; 
+    
+    // IDs dos contêineres para os mapas
+    const CLIM_CONTAINER_ID = 'mapa-clim-container';
+    const PREV_CONTAINER_ID = 'mapa-prev-container';
+    const TOP10_CONTAINER_ID = 'top10-container';
+
+    // Função principal para carregar os gráficos com base na seleção (mensal/ytd)
+    function loadNewCharts(viewType) {
+        let climKey, prevKey;
+        
+        // Mapeamento da Visualização para as Chaves da API
+        if (viewType === 'ytd') {
+            climKey = 'ghi_ytd_clim';
+            prevKey = 'ghi_ytd_prev';
+            document.getElementById('view-title-span').textContent = 'Anomalias Acumuladas (YTD)';
+        } else {
+            // Padrão: 'mensal'
+            climKey = 'ghi_clim';
+            prevKey = 'ghi_prev';
+            document.getElementById('view-title-span').textContent = 'Anomalias Mensais';
+        }
+
+        // 1. Chamada para o Mapa Clim/YTD Clim
+        fetchAndRenderChart(climKey, CLIM_CONTAINER_ID);
+
+        // 2. Chamada para o Mapa Prev/YTD Prev
+        fetchAndRenderChart(prevKey, PREV_CONTAINER_ID);
+        
+        // NOTA: Para o Top 10, você pode chamar fetchAndRenderChart('top10_bar', TOP10_CONTAINER_ID); quando implementado
+    }
+
+    function fetchAndRenderChart(chartType, containerId) {
+        const url = `${GCF_ENDPOINT}?chart_type=${chartType}`;
+        const container = document.getElementById(containerId);
+        
+        // Loader/Feedback
+        container.innerHTML = '<div class="text-center py-10 text-xl text-slate-400">Carregando gráfico Plotly...</div>'; 
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro na API (Status ${response.status}): ${response.statusText}`);
+                }
+                return response.text(); 
+            })
+            .then(htmlContent => {
+                // Injeta o HTML Plotly no contêiner
+                container.innerHTML = htmlContent;
+                // Ajusta a altura do mapa para ocupar o espaço total (importante para o Plotly dentro de DIVs)
+                const iframe = container.querySelector('iframe');
+                if (iframe) {
+                     iframe.style.height = '786px';
+                     iframe.style.width = '100%';
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao buscar gráfico:", error);
+                container.innerHTML = `<p class="text-center py-10 text-red-500">Erro ao carregar o gráfico ${chartType}. Tente recarregar a página.</p>`;
+            });
+    }
+
+    // Inicializa com os gráficos mensais ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+        loadNewCharts('mensal');
+        
+        // Opcional: Chama o gráfico Top 10 (se for implementado via API)
+        // fetchAndRenderChart('top10_bar', TOP10_CONTAINER_ID); 
+    });
+    </script>
 </head>
 <body class="antialiased">
 
@@ -72,41 +144,35 @@
 
         <section id="visualization" class="py-3 md:py-6">
             <div class="text-center max-w-4xl mx-auto px-6">
-                <h3 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4">Irradiação Solar Relativa para o Mês no Paraná</h3>
+                <h3 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4">
+                    <span id="view-title-span">Anomalias Mensais</span>
+                    <span class="text-xl text-slate-500 font-inter">no Paraná</span>
+                </h3>
                 <p class="text-slate-600 mb-8 max-w-3xl mx-auto">
                     A síntese de irradiância global horizontal (GHI) é referência para geração elétrica fotovoltaica. 
                     A plotagem relativa a períodos anteriores facilita o comparativo em geradores em operação.
                 </p>
-            </div>
-            
-            <div class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
-                <figure class="m-0">
-                    <iframe 
-                        src="https://gd-pr-report-547250988053.southamerica-east1.run.app/?chart_type=ghi_clim" 
-                        width="100%" 
-                        height="786px" 
-                        style="border: none; overflow: hidden;"
-                        title="Mapa de Irradiância GHI Relativa à Média Longa no Paraná">
-                    </iframe>
-                    <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
-                        Mapa da Irradiância Solar (GHI) no Paraná - Relativo a Média Longa.
-                    </figcaption>
-                </figure>
-            </div>
-
-            <div class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
-                <figure class="m-0">
-                    <iframe 
-                        src="https://gd-pr-report-547250988053.southamerica-east1.run.app/?chart_type=ghi_prev" 
-                        width="100%" 
-                        height="786px" 
-                        style="border: none; overflow: hidden;"
-                        title="Mapa de Irradiância GHI Relativa a 2024 no Paraná">
-                    </iframe>
-                    <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
-                        Irradiância Solar (GHI) no Paraná - Relativo ao Ano Passado.
-                    </figcaption>
-                </figure>
+                <div class="mb-8">
+                    <label for="view_selector" class="text-lg font-semibold text-slate-700 mr-4">Visualização:</label>
+                    <select id="view_selector" onchange="loadNewCharts(this.value)" 
+                            class="p-2 border border-slate-300 rounded-lg shadow-sm focus:ring-slate-500 focus:border-slate-500">
+                        <option value="mensal">Mensal (Mês Atual vs. Histórico/Anterior)</option>
+                        <option value="ytd">Acumulada (YTD - Ano vs. Histórico/Anterior)</option>
+                    </select>
+                </div>
+                <div id="mapa-clim-container" class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
+                    <div class="text-center py-10 text-xl text-slate-400">Carregando Mapa (Climatologia)...</div>
+                </div>
+                <figcaption class="p-4 text-center text-sm text-slate-500 bg-white max-w-4xl mx-auto">
+                    Mapa da Irradiância Solar (GHI) no Paraná - Relativo a Média Longa.
+                </figcaption>
+                <div id="mapa-prev-container" class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
+                    <div class="text-center py-10 text-xl text-slate-400">Carregando Mapa (Previsão/Ano Anterior)...</div>
+                </div>
+                <figcaption class="p-4 text-center text-sm text-slate-500 bg-white max-w-4xl mx-auto">
+                    Irradiância Solar (GHI) no Paraná - Relativo ao Ano Passado.
+                </figcaption>
+                
             </div>
             
             <div class="text-center max-w-4xl mx-auto px-6 mt-16">
