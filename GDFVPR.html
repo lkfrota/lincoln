@@ -21,6 +21,7 @@
             font-family: 'Quantico', sans-serif;
         }
     </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -95,8 +96,7 @@
     function fetchAndRenderChart(chartType, containerId) {
         const url = `${GCF_ENDPOINT}?chart_type=${chartType}`;
         const container = document.getElementById(containerId);
-        
-        // Loader/Feedback
+    
         container.innerHTML = '<div class="text-center py-10 text-xl text-slate-400">Carregando gráfico...</div>'; 
 
         fetch(url)
@@ -104,21 +104,17 @@
                 if (!response.ok) {
                     throw new Error(`Erro na API (Status ${response.status}): ${response.statusText}`);
                 }
-                return response.text(); 
+            // 🛑 AGORA ESPERAMOS JSON, NÃO HTML
+                return response.json(); 
             })
-            .then(htmlContent => {
-                // Injeta o HTML Plotly no contêiner
-                container.innerHTML = htmlContent;
-                // Ajusta a altura do mapa para ocupar o espaço total (importante para o Plotly dentro de DIVs)
-                const iframe = container.querySelector('iframe');
-                if (iframe) {
-                     iframe.style.height = '786px';
-                     iframe.style.width = '100%';
-                }
+            .then(plotData => {
+            // 🛑 USAMOS Plotly.newPlot() PARA DESENHAR O GRÁFICO
+            // O Plotly.newPlot espera (id_do_container, array_de_dados, objeto_layout)
+                Plotly.newPlot(containerId, plotData.data, plotData.layout);
             })
             .catch(error => {
-                console.error("Erro ao buscar gráfico:", error);
-                container.innerHTML = `<p class="text-center py-10 text-red-500">Erro ao carregar o gráfico ${chartType}. Tente recarregar a página.</p>`;
+                console.error("Erro ao buscar ou renderizar gráfico:", error);
+                container.innerHTML = `<p class="text-center py-10 text-red-500">Erro ao carregar o gráfico ${chartType}.</p>`;
             });
     }
 
@@ -149,7 +145,7 @@
                 </h3>
                 <p class="text-slate-600 mb-8 max-w-3xl mx-auto">
                     A síntese de irradiância global horizontal (GHI) é referência para geração elétrica fotovoltaica. 
-                    A plotagem relativa a períodos anteriores facilita o comparativo em geradores em operação.
+                    A plotagem relativa a períodos anteriores facilita o comparativo com geradores em operação.
                 </p>
                 <div class="mb-8">
                     <label for="view_selector" class="text-lg font-semibold text-slate-700 mr-4">Visualização:</label>
