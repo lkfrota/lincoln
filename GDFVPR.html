@@ -60,6 +60,7 @@
       gtag('config', 'G-1VZWVH6B57');
     </script>
     <!-- Google tag (gtag.js) -->
+    
     <!-- script para chamar e carregar os gráficos -->
     <script>
     // URL da sua Cloud Function (API)
@@ -133,8 +134,8 @@
 
     <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="font-quantico text-xl md:text-2xl font-bold text-slate-700">GD Fotovoltaica no Paraná</h1>
-            <span class="text-sm text-slate-500">por Lincoln K. Frota</span>
+            <h1 class="font-quantico text-xl md:text-2xl font-bold text-slate-700">Energia Solar Fotovoltaica no Paraná</h1>
+            <span class="text-sm text-slate-500">GD - Geração Distribuida</span>
         </nav>
     </header>
 
@@ -147,8 +148,10 @@
                 </h3>
                 <p class="text-slate-600 mb-8 max-w-3xl mx-auto">
                     A síntese de irradiância global horizontal (GHI) é referência para geração elétrica fotovoltaica. 
-                    A plotagem relativa a períodos anteriores facilita o comparativo com geradores em operação.
+                    A proporção com períodos anteriores serve como comparativo no monitoramento de geradores em operação.
+                    Para períodos anteriores é sempre usado o respectivo do ciclo solar.
                 </p>
+                <!-- Aqui parece ser o seletor de lista -->
                 <div class="mb-8">
                     <label for="view_selector" class="text-lg font-semibold text-slate-700 mr-4">Visualização:</label>
                     <select id="view_selector" onchange="loadNewCharts(this.value)" 
@@ -157,19 +160,21 @@
                         <option value="ytd">Acumulada (Acumulado Ano vs. Histórico/Anterior)</option>
                     </select>
                 </div>
+                <!-- Aqui o primeiro mapa -->
                 <div id="mapa-clim-container" class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
                     <div class="text-center py-10 text-xl text-slate-400">Carregando Dados...</div>
+                    <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
+                        Mapa da Irradiação Solar (GHI) no Paraná - Relativo a Média Longa.
+                    </figcaption>
                 </div>
-                <figcaption class="p-4 text-center text-sm text-slate-500 bg-white max-w-4xl mx-auto">
-                    Mapa da Irradiação Solar (GHI) no Paraná - Relativo a Média Longa.
-                </figcaption>
+                <!-- Aqui o segundo mapa -->
                 <div id="mapa-prev-container" class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
                     <div class="text-center py-10 text-xl text-slate-400">Carregando Mapa (Previsão/Ano Anterior)...</div>
+                    <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
+                        Irradiação Solar (GHI) no Paraná - Relativo ao Mesmo período do Ano Passado.
+                    </figcaption>
                 </div>
-                <figcaption class="p-4 text-center text-sm text-slate-500 bg-white max-w-4xl mx-auto">
-                    Irradiação Solar (GHI) no Paraná - Relativo ao Mesmo período do Ano Passado.
-                </figcaption>
-                
+                                
             </div>
             
             <div class="text-center max-w-4xl mx-auto px-6 mt-16">
@@ -192,26 +197,26 @@
         <section id="about" class="py-16 md:py-24 max-w-3xl mx-auto">
             <h3 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4">Sobre o Relatório</h3>
             <p class="text-slate-600 text-lg mb-4">
-                Este relatório é uma síntese dos dados de Global Horizontal Irradiance (GHI) e Geração Distribuida Fotovoltaica (GD-FV) para o estado brasileiro do Paraná. 
-                Visa oferecer uma visão resumida das condições recentes para esse mercado.
+                Este relatório é uma síntese dos dados de Global Horizontal Irradiance (GHI) e Geração Distribuida Fotovoltaica (GD-FV) para o estado do Paraná. 
+                Visa oferecer uma visão resumida das condições recentes para esse setor produtivo.
                 Os dados de irradiância foram obtidos da plataforma Oikolab, que disponibiliza o modelo climático ERA5, 
                 a mais recente geração de reanálise de dados produzido pela Copernicus Climate Change Service (C3S), implementado pelo ECMWF.
             </p>
             <p class="text-slate-600 text-lg">
-                O GHI é um fator crítico para a estimativa de produção de energia, e esta análise visa ainda fornecer informações de referência 
-                para engenheiros, projetistas e investidores, ajudando na tomada de decisões estratégicas e na 
+                O GHI é um fator crítico para a estimativa de produção de energia, e esta análise visa fornecer informações de referência 
+                para engenheiros, projetistas, operadores e investidores, ajudando na tomada de decisões e na orientação de
                 avaliação de performance de projetos de geração distribuída em operação.
             </p>
         </section>
         
-        <section id="contact" class="py-16 md:py-24">
+        <section id="contact" class="py-12 md:py-20">
             <div class="text-center max-w-3xl mx-auto px-6">
                 <h2 class="font-quantico text-3xl md:text-4xl font-bold text-slate-800 mb-4">📞 Entre em Contato</h2>
                 <p class="text-slate-600 mb-10">
                     Gostou do relatório? Gostaria de reportar uma correção? Consultar uma aplicação? Adaptação? Melhoria? Entre em contato comigo pelos canais abaixo.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                    <!-- Para usar uma imagem, substitua o emoji pela tag <img> e adicione o arquivo 'wa-logo.png' na mesma pasta. -->
+                    <!-- Para usar uma imagem, substitua o emoji pela tag <img> e adicione o arquivo 'wa-logo.png' na mesma pasta.
                     <a href="https://wa.me/5541999358444" target="_blank" class="action-button bg-white p-6 rounded-xl shadow-md hover:shadow-xl border border-slate-200/80 flex flex-col items-center justify-center">
                         <img src="wa-logo.png" alt="Logo WhatsApp" class="w-10 h-10 mb-3 mx-auto">
                         <h3 class="font-bold text-lg text-slate-700">WhatsApp</h3>
@@ -221,7 +226,7 @@
                         <div class="text-4xl mb-3" aria-hidden="true">📱</div>
                         <h3 class="font-bold text-lg text-slate-700">Ligar</h3>
                         <p class="text-slate-500" aria-label="Telefone 41 99935 8444">(41) 99935-8444</p>
-                    </a>
+                    </a> -->
                     <a href="mailto:lkfrota@gmail.com" class="action-button bg-white p-6 rounded-xl shadow-md hover:shadow-xl border border-slate-200/80 flex flex-col items-center justify-center">
                         <div class="text-4xl mb-3" aria-hidden="true">✉️</div>
                         <h3 class="font-bold text-lg text-slate-700">E-mail</h3>
