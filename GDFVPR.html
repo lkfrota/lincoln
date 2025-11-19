@@ -108,7 +108,6 @@
                 return response.json();
             })
             .then(plotData => {
-                debugger;
             // 🛑 USAMOS Plotly.newPlot() PARA DESENHAR O GRÁFICO
             // O Plotly.newPlot espera (id_do_container, array_de_dados, objeto_layout)
                 Plotly.newPlot(containerId, plotData.data, plotData.layout);
