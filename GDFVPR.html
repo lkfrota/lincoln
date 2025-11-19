@@ -76,7 +76,7 @@
         if (viewType === 'ytd') {
             climKey = 'ghi_ytd_clim';
             prevKey = 'ghi_ytd_prev';
-            document.getElementById('view-title-span').textContent = 'Desvio Acumulado no Ano (YTD)';
+            document.getElementById('view-title-span').textContent = 'Desvio Acumulado no Ano';
         } else {
             // Padrão: 'mensal'
             climKey = 'ghi_clim';
@@ -104,18 +104,8 @@
                 if (!response.ok) {
                     throw new Error(`Erro na API (Status ${response.status}): ${response.statusText}`);
                 }
-            // 🛑 AGORA ESPERAMOS JSON, NÃO HTML
-                return response.text().then(text => {
-                    try {
-                    // 2. TENTA ANALISAR COMO JSON
-                        return JSON.parse(text); 
-                    } catch (e) {
-                    // 3. FALHA NA ANÁLISE JSON: REGISTRA O TEXTO BRUTO RECEBIDO
-                        console.error("ERRO DE SINTAXE JSON: Resposta recebida do servidor:", text);
-                    // 4. Joga um erro customizado para o bloco .catch
-                        throw new SyntaxError("Server did not return valid JSON.", { cause: text });
-                    }
-                });
+            // 🛑 
+                return response.json();
             })
             .then(plotData => {
             // 🛑 USAMOS Plotly.newPlot() PARA DESENHAR O GRÁFICO
@@ -124,11 +114,7 @@
             })
             .catch(error => {
                 console.error("Erro ao buscar ou renderizar gráfico:", error);
-                if (error instanceof SyntaxError && error.message === "Server did not return valid JSON.") {
-                    container.innerHTML = `<p class="text-center py-10 text-red-500">Erro: O servidor retornou dados inválidos. Verifique o console para detalhes!</p>`;
-                } else {
-                    container.innerHTML = `<p class="text-center py-10 text-red-500">Erro: ${error.message || "Falha desconhecida"} ao carregar.</p>`;
-                }
+                container.innerHTML = `<p class="text-center py-10 text-red-500">Erro ao carregar o gráfico ${chartType}. Verifique o console.</p>`;
             });
     }
 
