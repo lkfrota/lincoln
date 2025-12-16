@@ -111,8 +111,12 @@
                 return response.json();
             })
             .then(plotData => {
-            // 🛑 USAMOS Plotly.newPlot() PARA DESENHAR O GRÁFICO
-            // O Plotly.newPlot espera (id_do_container, array_de_dados, objeto_layout)
+                if (plotData.layout && plotData.layout.xaxis) {
+                    plotData.layout.xaxis.type = plotData.layout.xaxis.type || 'linear'; // default to linear if not set
+                }
+                if (plotData.layout && plotData.layout.yaxis) {
+                    plotData.layout.yaxis.type = plotData.layout.yaxis.type || 'linear'; // default to linear if not set
+                }
                 Plotly.newPlot(containerId, plotData.data, plotData.layout);
             })
             .catch(error => {
