@@ -100,7 +100,8 @@
         const url = `${GCF_ENDPOINT}?chart_type=${chartType}`;
         const container = document.getElementById(containerId);
     
-        // container.innerHTML = '<div class="text-center py-10 text-xl text-slate-400">Carregando gráfico...</div>'; 
+        // Display loading message directly in the container. Plotly.newPlot will overwrite this.
+        container.innerHTML = '<div class="text-center py-10 text-xl text-slate-400">Carregando gráfico...</div>'; 
 
         fetch(url)
             .then(response => {
@@ -111,9 +112,28 @@
                 return response.json();
             })
             .then(plotData => {
-            // 🛑 USAMOS Plotly.newPlot() PARA DESENHAR O GRÁFICO
-            // O Plotly.newPlot espera (id_do_container, array_de_dados, objeto_layout)
-                Plotly.newPlot(containerId, plotData.data, plotData.layout);
+                // Ensure Plotly's layout is set for autosizing and removes fixed dimensions
+                const updatedLayout = {
+                    ...plotData.layout,
+                    autosize: true, // Enable Plotly's internal autosizing based on container dimensions
+                    width: null,    // Explicitly nullify width to allow CSS/container to dictate it
+                    height: null,   // Explicitly nullify height to allow CSS/container to dictate it
+                };
+                
+                // Configuration for Plotly rendering, enabling full responsiveness
+                const config = {
+                    responsive: true,     // Makes the plot responsive to window resizing
+                    displayModeBar: false // Optional: Hides the Plotly toolbar for a cleaner user experience
+                };
+
+                // Remove any existing plot before creating a new one to prevent potential issues
+                // with Plotly.newPlot when an element already contains a plot.
+                if (container.__plotly_editor_children) { 
+                    Plotly.purge(containerId);
+                }
+
+                // Render the new plot with updated layout and configuration
+                Plotly.newPlot(containerId, plotData.data, updatedLayout, config);
             })
             .catch(error => {
                 console.error("Erro ao buscar ou renderizar gráfico:", error);
@@ -161,27 +181,23 @@
                     </select>
                 </div>
                 <!-- Aqui o primeiro mapa -->
-                <div id="mapa-clim-container" class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white relative">
-                    <div class="relative pt-[82%]">
-                        <div id="plotly-target-clim" class="absolute top-0 left-0 w-full h-full">
-                        </div>
+                <figure class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white relative">
+                    <div id="mapa-clim-container" class="min-h-[400px]">
+                        <!-- Plotly content will be rendered here, replacing initial loading text -->
                     </div>
-                    <!--div class="text-center py-10 text-xl text-slate-400">Carregando Dados...</div-->
-                <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
-                    Mapa da Irradiação Solar (GHI) no Paraná - Relativo a Média Longa.
-                </figcaption>
-                </div>
+                    <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
+                        Mapa da Irradiação Solar (GHI) no Paraná - Relativo a Média Longa.
+                    </figcaption>
+                </figure>
                 <!-- Aqui o segundo mapa -->
-                <div id="mapa-prev-container" class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white relative">
-                    <div class="relative pt-[82%]">
-                        <div id="plotly-target-clim" class="absolute top-0 left-0 w-full h-full">
-                        </div>
+                <figure class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white relative">
+                    <div id="mapa-prev-container" class="min-h-[400px]">
+                        <!-- Plotly content will be rendered here, replacing initial loading text -->
                     </div>
-                    <!--div class="text-center py-10 text-xl text-slate-400">Carregando Mapa...</div-->
                     <figcaption class="p-4 text-center text-sm text-slate-500 bg-white w-full max-w-4xl mx-auto">
                         Irradiação Solar (GHI) no Paraná - Relativo ao Mesmo período do Ano Passado.
                     </figcaption>
-                </div>            
+                </figure>          
             </div>
             <!-- Aqui o top10 -->
             <div class="text-center max-w-4xl mx-auto px-6 mt-16">
