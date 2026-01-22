@@ -118,6 +118,13 @@
                     autosize: true, // Enable Plotly's internal autosizing based on container dimensions
                     width: null,    // Explicitly nullify width to allow CSS/container to dictate it
                     height: null,   // Explicitly nullify height to allow CSS/container to dictate it
+                    xaxis: {
+                        ...(plotData.layout.xaxis || {}), // Preserves existing X-axis properties
+                        // constrain: 'domain',         // Optional: Constrain axis range to plot's domain
+                    },
+                    yaxis: {
+                        ...(plotData.layout.yaxis || {}), // Preserves existing Y-axis properties
+                    },
                 };
                 
                 // Configuration for Plotly rendering, enabling full responsiveness
