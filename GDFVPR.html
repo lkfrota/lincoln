@@ -112,9 +112,39 @@
                 return response.json();
             })
             .then(plotData => {
-                // Ensure Plotly's layout is set for autosizing and removes fixed dimensions
+                // 1. Ajuste da Colorbar (Tratando cada traço do gráfico)
+                if (plotData.data) {
+                    plotData.data.forEach(trace => {
+                        // Verifica se o traço possui colorbar (comum em mapas/heatmaps)
+                        let cb = trace.colorbar || (trace.marker && trace.marker.colorbar);
+                        if (cb) {
+                            cb.orientation = 'h';   // Horizontal
+                            cb.y = -0.2;            // Posiciona abaixo da área de plotagem
+                            cb.x = 0;               // Alinhado à esquerda da área de plotagem
+                            cb.xanchor = 'left';
+                            cb.len = 1;             // Largura total da área de plotagem
+                            cb.thickness = 15;      // Espessura da barra
+                            if (cb.title) {
+                                cb.title.side = 'top'; // Título da legenda acima da barra
+                            }
+                        }
+                    });
+                }
                 const updatedLayout = {
                     ...plotData.layout,
+                    title: {
+                        x: 0.5,
+                        xanchor: 'center',
+                        font: {size: 24},
+                        subtitle: {
+                            font: {size: 16},
+                        },
+                    },
+                    margin: {
+                        ...plotData.layout.margin, 
+                        t: 100, // Espaço para título maior
+                        b: 120,  // Espaço para colorbar horizontal
+                    },                        
                     autosize: true, // Enable Plotly's internal autosizing based on container dimensions
                     width: null,    // Explicitly nullify width to allow CSS/container to dictate it
                     height: null,   // Explicitly nullify height to allow CSS/container to dictate it
@@ -130,7 +160,10 @@
                 // Configuration for Plotly rendering, enabling full responsiveness
                 const config = {
                     responsive: true,     // Makes the plot responsive to window resizing
-                    displayModeBar: false // Optional: Hides the Plotly toolbar for a cleaner user experience
+                    displayModeBar: true, // Optional: Hides the Plotly toolbar for a cleaner user experience
+                    displaylogo: false,   // Remove o ícone do Plotly para limpar a UI
+                    toImageButtonOptions: {scale: 2} // Alta resolução
+                        
                 };
 
                 // Remove any existing plot before creating a new one to prevent potential issues
