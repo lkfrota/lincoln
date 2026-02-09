@@ -133,10 +133,12 @@
                 const updatedLayout = {
                     ...plotData.layout,
                     title: {
+                        text: (plotData.layout.title && plotData.layout.title.text) ? plotData.layout.title.text : (typeof plotData.layout.title === 'string' ? plotData.layout.title : ""),
                         x: 0.5,
                         xanchor: 'center',
                         font: {size: 24},
                         subtitle: {
+                            text: (plotData.layout.title && plotData.layout.title.subtitle) ? plotData.layout.title.subtitle : "",
                             font: {size: 16},
                         },
                     },
