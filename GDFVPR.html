@@ -141,11 +141,11 @@
                             font: {size: 16},
                         },
                     },
-                    margin: {
-                        ...plotData.layout.margin, 
-                        t: 100, // Espaço para título maior
-                        b: 80,  // Espaço para colorbar horizontal
-                    },                        
+                    //margin: {
+                    //    ...plotData.layout.margin, 
+                    //    t: 100, // Espaço para título maior
+                    //    b: 80,  // Espaço para colorbar horizontal
+                    //},                        
                     autosize: true, // Enable Plotly's internal autosizing based on container dimensions
                     width: null,    // Explicitly nullify width to allow CSS/container to dictate it
                     height: null,   // Explicitly nullify height to allow CSS/container to dictate it
@@ -223,7 +223,7 @@
                 </div>
                 <!-- Aqui o primeiro mapa -->
                 <figure class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white relative">
-                    <div id="mapa-clim-container" class="min-h-[690px]">
+                    <div id="mapa-clim-container" class="min-h-[688px]">
                         <!-- Plotly content will be rendered here, replacing initial loading text -->
                     </div>
                     <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
@@ -232,7 +232,7 @@
                 </figure>
                 <!-- Aqui o segundo mapa -->
                 <figure class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white relative">
-                    <div id="mapa-prev-container" class="min-h-[690px]">
+                    <div id="mapa-prev-container" class="min-h-[688px]">
                         <!-- Plotly content will be rendered here, replacing initial loading text -->
                     </div>
                     <figcaption class="p-4 text-center text-sm text-slate-500 bg-white w-full max-w-4xl mx-auto">
