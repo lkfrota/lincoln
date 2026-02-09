@@ -29,8 +29,6 @@
       "headline": "Relatório GD FV Paraná - Irradiação Solar e Potência Instalada",
       "description": "Análise da Irradiação Solar Relativa (GHI) e ranking dos Top 10 municípios do Paraná com maior potência instalada em Geração Distribuída Fotovoltaica (GD-FV). Dados ANEEL e ERA5.",
       "image": [
-        "https://lkfrota.github.io/lincoln/graficos/PR_GHIrelSep2025.png",
-        "https://lkfrota.github.io/lincoln/graficos/PR_GHI24Sep2025.png",
         "https://lkfrota.github.io/lincoln/graficos/top10Sep.png"
       ],
       "author": {
@@ -47,7 +45,7 @@
         }
       },
       "datePublished": "2025-09-01",
-      "dateModified": "2025-12-09"
+      "dateModified": "2026-02-09"
     }
     </script>
     <!-- Google tag (gtag.js) -->
@@ -122,8 +120,8 @@
                             cb.y = -0.2;            // Posiciona abaixo da área de plotagem
                             cb.x = 0;               // Alinhado à esquerda da área de plotagem
                             cb.xanchor = 'left';
-                            cb.len = 1;             // Largura total da área de plotagem
-                            cb.thickness = 15;      // Espessura da barra
+                            cb.len = 0.9;             // Largura total da área de plotagem
+                            cb.thickness = 20;      // Espessura da barra
                             if (cb.title) {
                                 cb.title.side = 'top'; // Título da legenda acima da barra
                             }
@@ -144,7 +142,7 @@
                     },
                     margin: {
                         ...plotData.layout.margin, 
-                        t: 100, // Espaço para título maior
+                        t: 120, // Espaço para título maior
                         b: 120,  // Espaço para colorbar horizontal
                     },                        
                     autosize: true, // Enable Plotly's internal autosizing based on container dimensions
@@ -211,7 +209,7 @@
                 <p class="text-slate-600 mb-8 max-w-3xl mx-auto">
                     A síntese de irradiância global horizontal (GHI) é referência para geração elétrica fotovoltaica. 
                     A proporção com períodos anteriores serve como comparativo no monitoramento de geradores em operação.
-                    Para períodos anteriores é sempre usado o respectivo do ciclo solar.
+                    Para períodos anteriores é sempre usado o respectivo no ciclo solar, ou seja, de Janeiro a Abril só é comparado com Janeiro a Abril de um ou múltiplos anos.
                 </p>
                 <!-- Aqui parece ser o seletor de lista -->
                 <div class="mb-8">
@@ -228,7 +226,7 @@
                         <!-- Plotly content will be rendered here, replacing initial loading text -->
                     </div>
                     <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
-                        Mapa da Irradiação Solar (GHI) no Paraná - Relativo a Média Longa.
+                        Mapa da Irradiação Solar (GHI) - Relativo à Média Longa.
                     </figcaption>
                 </figure>
                 <!-- Aqui o segundo mapa -->
