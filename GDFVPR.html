@@ -118,8 +118,8 @@
                         if (cb) {
                             cb.orientation = 'h';   // Horizontal
                             cb.y = -0.2;            // Posiciona abaixo da área de plotagem
-                            cb.x = 0;               // Alinhado à esquerda da área de plotagem
-                            cb.xanchor = 'left';
+                            cb.x = 0.5;               // Alinhado à esquerda da área de plotagem
+                            cb.xanchor = 'center';
                             cb.len = 0.9;             // Largura total da área de plotagem
                             cb.thickness = 20;      // Espessura da barra
                             if (cb.title) {
@@ -134,6 +134,8 @@
                         text: (plotData.layout.title && plotData.layout.title.text) ? plotData.layout.title.text : (typeof plotData.layout.title === 'string' ? plotData.layout.title : ""),
                         x: 0.5,
                         xanchor: 'center',
+                        yanchor: 'top',
+                        pad: {t: 10},
                         font: {size: 24},
                         subtitle: {
                             text: plotData.layout.title?.subtitle || plotData.layout.subtitle || "",
@@ -142,7 +144,7 @@
                     },
                     margin: {
                         ...plotData.layout.margin, 
-                        t: 120, // Espaço para título maior
+                        t: 140, // Espaço para título maior
                         b: 120,  // Espaço para colorbar horizontal
                     },                        
                     autosize: true, // Enable Plotly's internal autosizing based on container dimensions
