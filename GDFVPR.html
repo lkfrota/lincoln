@@ -120,7 +120,7 @@
                             cb.y = -0.2;            // Posiciona abaixo da área de plotagem
                             cb.x = 0.5;               // Alinhado à esquerda da área de plotagem
                             cb.xanchor = 'center';
-                            cb.len = 0.9;             // Largura total da área de plotagem
+                            cb.len = 0.8;             // Largura total da área de plotagem
                             cb.thickness = 20;      // Espessura da barra
                             if (cb.title) {
                                 cb.title.side = 'top'; // Título da legenda acima da barra
@@ -144,8 +144,8 @@
                     },
                     margin: {
                         ...plotData.layout.margin, 
-                        t: 140, // Espaço para título maior
-                        b: 120,  // Espaço para colorbar horizontal
+                        t: 160, // Espaço para título maior
+                        b: 130,  // Espaço para colorbar horizontal
                     },                        
                     autosize: true, // Enable Plotly's internal autosizing based on container dimensions
                     width: null,    // Explicitly nullify width to allow CSS/container to dictate it
