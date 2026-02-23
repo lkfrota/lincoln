@@ -90,6 +90,7 @@
 
       gtag('config', 'G-1VZWVH6B57');
     </script>
+    <!-- Badge Linkedin -->
     <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 </head>
 <body class="antialiased">
@@ -306,11 +307,23 @@
             // Atualiza o Badge do LinkedIn (Substituindo o botão antigo)
             const badgeContainer = document.getElementById('linkedin-badge-container');
             if (badgeContainer) {
-                const locale = lang === 'en' ? 'en_US' : 'pt_BR';
+                const isEn = lang === 'en';
+                const locale = isEn ? 'en_US' : 'pt_BR';
     
-                // 1. Reinjeta a div com o novo locale
-                badgeContainer.innerHTML = `<div class="badge-base LI-profile-badge" data-locale="${locale}" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="lincoln-k-frota" data-version="v1"></div>`;
-    
+                const profileUrl = isEn 
+                    ? "https://www.linkedin.com/in/lincoln-k-frota/?locale=en_US" 
+                    : "https://www.linkedin.com/in/lincoln-k-frota/?locale=pt_BR";
+
+                badgeContainer.innerHTML = `
+                    <div class="badge-base LI-profile-badge" 
+                         data-locale="${locale}" 
+                         data-size="medium" 
+                         data-theme="light" 
+                         data-type="VERTICAL" 
+                         data-vanity="lincoln-k-frota" 
+                         data-version="v1">
+                       <a class="badge-base__link LI-simple-link" href="${profileUrl}">Lincoln Kalckmann Frota</a>
+                    </div>`;
                 // 2. Chama o método 'parse' da biblioteca do LinkedIn se ela já estiver carregada
                 // Isso garante que o badge apareça sem precisar atualizar a página inteira
                 if (window.LInProfile && typeof window.LInProfile.parse === 'function') {
