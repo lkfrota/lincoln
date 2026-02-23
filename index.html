@@ -90,7 +90,7 @@
 
       gtag('config', 'G-1VZWVH6B57');
     </script>
-    <!-- Badge Linkedin -->
+    <!-- Linkedin badge -->
     <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 </head>
 <body class="antialiased">
@@ -228,7 +228,7 @@
                 'chat_btn_home': 'Entreviste meu Histórico',
                 'home_chat_call_to_action': 'Faça uma entrevista imediata com meu Agente de IA! Ele pode consultar meu histórico completo e responder suas perguntas.',
                 'home_cv_summary': 'Com cerca de 20 anos de experiência em operações nas indústrias de manufatura, energia solar e óleo e gás, atuo como Engenheiro de Performance e Confiabilidade Industrial e Especialista em PCM. Minhas realizações incluem a melhoria de processos que resultaram em alta disponibilidade e redução de falhas, liderança na estruturação de operações e inovação em projetos de campo. Sou reconhecido pela minha abordagem analítica e capacidade de transformar desafios em resultados tangíveis, utilizando análises de dados e agora também inteligência artificial.',
-                'home_linkedin_call': 'Saiba ainda mais no LinkedIn',
+                //'home_linkedin_call': 'Saiba ainda mais no LinkedIn',
                 'nav_home': 'Início',
                 'nav_contact': 'Contato',
                 'nav_chat': 'Consulte com IA',
@@ -257,7 +257,7 @@
                 'chat_btn_home': 'Interview my History',
                 'home_chat_call_to_action': 'Have an immediate interview with my AI Agent! It can consult my complete history and answer your questions.',
                 'home_cv_summary': 'With nearly 20 years of experience in operations across manufacturing, solar energy, and oil & gas industries, I serve as a Performance and Industrial Reliability Engineer and Maintenance Specialist. My achievements include process improvements resulting in high availability and fault reduction, leading operational structuring and innovation in field projects. I am recognized for my analytical approach and ability to transform challenges into tangible results, leveraging data analysis and now also artificial intelligence.',
-                'home_linkedin_call': 'Learn more on LinkedIn',
+                //'home_linkedin_call': 'Learn more on LinkedIn',
                 'nav_home': 'Home',
                 'nav_contact': 'Contact',
                 'nav_chat': 'Consult with AI',
@@ -307,23 +307,11 @@
             // Atualiza o Badge do LinkedIn (Substituindo o botão antigo)
             const badgeContainer = document.getElementById('linkedin-badge-container');
             if (badgeContainer) {
-                const isEn = lang === 'en';
-                const locale = isEn ? 'en_US' : 'pt_BR';
+                const locale = lang === 'en' ? 'en_US' : 'pt_BR';
     
-                const profileUrl = isEn 
-                    ? "https://www.linkedin.com/in/lincoln-k-frota/?locale=en_US" 
-                    : "https://www.linkedin.com/in/lincoln-k-frota/?locale=pt_BR";
-
-                badgeContainer.innerHTML = `
-                    <div class="badge-base LI-profile-badge" 
-                         data-locale="${locale}" 
-                         data-size="medium" 
-                         data-theme="light" 
-                         data-type="VERTICAL" 
-                         data-vanity="lincoln-k-frota" 
-                         data-version="v1">
-                       <a class="badge-base__link LI-simple-link" href="${profileUrl}">Lincoln Kalckmann Frota</a>
-                    </div>`;
+                // 1. Reinjeta a div com o novo locale
+                badgeContainer.innerHTML = `<div class="badge-base LI-profile-badge" data-locale="${locale}" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="lincoln-k-frota" data-version="v1"></div>`;
+    
                 // 2. Chama o método 'parse' da biblioteca do LinkedIn se ela já estiver carregada
                 // Isso garante que o badge apareça sem precisar atualizar a página inteira
                 if (window.LInProfile && typeof window.LInProfile.parse === 'function') {
