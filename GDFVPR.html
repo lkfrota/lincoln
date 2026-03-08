@@ -120,6 +120,10 @@
                         y: 0.93,
                         yanchor: 'top',
                     },
+                    xaxis: {
+                    ...plotData.layout.xaxis,
+                    constrain: 'domain',  // restaurar — previne extensão do range
+                    },
                 };
                 
                 // Configuration for Plotly rendering, enabling full responsiveness
