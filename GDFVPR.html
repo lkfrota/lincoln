@@ -110,56 +110,15 @@
                 return response.json();
             })
             .then(plotData => {
-                // 1. Ajuste da Colorbar (Tratando cada traço do gráfico)
-                if (plotData.data) {
-                    plotData.data.forEach(trace => {
-                        // Verifica se o traço possui colorbar (comum em mapas/heatmaps)
-                        let cb = trace.colorbar || (trace.marker && trace.marker.colorbar);
-                        if (cb) {
-                            cb.orientation = 'h';   // Horizontal
-                            cb.y = -0.2;            // Posiciona abaixo da área de plotagem
-                            cb.x = 0.5;               // Alinhado à esquerda da área de plotagem
-                            cb.xanchor = 'center';
-                            cb.len = 0.8;             // Largura total da área de plotagem
-                            cb.thickness = 20;      // Espessura da barra
-                            if (cb.title) {
-                                cb.title.side = 'top'; // Título da legenda acima da barra
-                            }
-                        }
-                    });
-                }
+                
                 const updatedLayout = {
                     ...plotData.layout,
                     title: {
-                        automargin: true,
-                        text: (plotData.layout.title && plotData.layout.title.text) ? plotData.layout.title.text : (typeof plotData.layout.title === 'string' ? plotData.layout.title : ""),
+                        ...plotData.layout.title,
                         x: 0.5,
                         xanchor: 'center',
                         y: 0.93,
                         yanchor: 'top',
-                        pad: {t: 0},
-                        font: {size: 26},
-                        subtitle: {
-                            text: (plotData.layout.title.subtitle && plotData.layout.title.subtitle.text) ? plotData.layout.title.subtitle.text : (typeof plotData.layout.title.subtitle === 'string' ? plotData.layout.title.subtitle : ""),
-                            font: {size: 20},
-                        },
-                    },
-                    margin: {
-                        t: 100, // Espaço para título maior
-                        b: 150,  // Espaço para colorbar horizontal
-                        //l: 20,
-                        //r: 20,
-                        pad: 0,
-                    },                        
-                    autosize: true, // Enable Plotly's internal autosizing based on container dimensions
-                    width: null,    // Explicitly nullify width to allow CSS/container to dictate it
-                    height: null,   // Explicitly nullify height to allow CSS/container to dictate it
-                    xaxis: {
-                        ...(plotData.layout.xaxis || {}), // Preserves existing X-axis properties
-                        constrain: 'domain',         // Optional: Constrain axis range to plot's domain
-                    },
-                    yaxis: {
-                        ...(plotData.layout.yaxis || {}), // Preserves existing Y-axis properties
                     },
                 };
                 
