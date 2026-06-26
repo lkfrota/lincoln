@@ -188,9 +188,9 @@
     // Inicializa com os gráficos mensais ao carregar a página
     document.addEventListener('DOMContentLoaded', () => {
         loadNewCharts('mensal');
-        
-        // Opcional: Chama o gráfico Top 10 (se for implementado via API)
-        // fetchAndRenderChart('top10_bar', TOP10_CONTAINER_ID); 
+
+        // Top 10 servido pela Cloud Function (independe do seletor mensal/ytd)
+        fetchAndRenderChart('top10_bar', TOP10_CONTAINER_ID);
     });
     </script>
 </head>
@@ -253,7 +253,9 @@
             </div>
             <div class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
                 <figure class="m-0">
-                    <img src="graficos/top10Apr.png" alt="Gráfico Top 10 Municípios Paraná Potência Instalada GD" class="w-full h-auto" loading="lazy">
+                    <div id="top10-container" class="min-h-[650px]">
+                        <!-- Gráfico Plotly do Top 10 renderizado aqui pela Cloud Function -->
+                    </div>
                     <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
                         Gráfico: Evolução 24 Meses Top 10 Municípios com Geração Distribuída no Paraná.
                     </figcaption>
