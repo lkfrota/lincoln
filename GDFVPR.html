@@ -22,14 +22,14 @@
         }
     </style>
     <script src="https://cdn.plot.ly/plotly-3.3.0.min.js"></script>
-    <script type="application/ld+json">
+    <script type="application/ld+json" id="report-jsonld">
     {
       "@context": "https://schema.org",
       "@type": "Report",
       "headline": "Relatório GD FV Paraná - Irradiação Solar e Potência Instalada",
       "description": "Análise da Irradiação Solar Relativa (GHI) e ranking dos Top 10 municípios do Paraná com maior potência instalada em Geração Distribuída Fotovoltaica (GD-FV). Dados ANEEL e ERA5.",
       "image": [
-        "https://lkfrota.github.io/lincoln/graficos/top10Sep.png"
+        "https://lkfrota.github.io/lincoln/graficos/top10Apr.png"
       ],
       "author": {
         "@type": "Person",
@@ -57,8 +57,7 @@
 
       gtag('config', 'G-1VZWVH6B57');
     </script>
-    <!-- Google tag (gtag.js) -->
-    
+
     <!-- script para chamar e carregar os gráficos -->
     <script>
     // URL da sua Cloud Function (API)
@@ -90,8 +89,6 @@
 
         // 2. Chamada para o Mapa Prev/YTD Prev
         fetchAndRenderChart(prevKey, PREV_CONTAINER_ID);
-        
-        // NOTA: Para o Top 10, você pode chamar fetchAndRenderChart('top10_bar', TOP10_CONTAINER_ID); quando implementado
     }
 
     function fetchAndRenderChart(chartType, containerId) {
@@ -106,65 +103,22 @@
                 if (!response.ok) {
                     throw new Error(`Erro na API (Status ${response.status}): ${response.statusText}`);
                 }
-            // 🛑 
                 return response.json();
             })
             .then(plotData => {
-                // 1. Ajuste da Colorbar (Tratando cada traço do gráfico)
-                //if (plotData.data) {
-                    //plotData.data.forEach(trace => {
-                        // Verifica se o traço possui colorbar (comum em mapas/heatmaps)
-                        //let cb = trace.colorbar || (trace.marker && trace.marker.colorbar);
-                        //if (cb) {
-                            //cb.orientation = 'h';   // Horizontal
-                            //cb.y = -0.25;            // Posiciona abaixo da área de plotagem
-                            //cb.x = 0.5;             
-                            //cb.xanchor = 'center';
-                            //cb.len = 0.8;             // Largura total da área de plotagem
-                            //cb.thickness = 20;      // Espessura da barra
-                            //if (cb.title) {
-                                //cb.title.side = 'top'; // Título da legenda acima da barra
-                            //}
-                        //}
-                    //});
-                //}
                 const updatedLayout = {
                     ...plotData.layout,
                     title: {
-                         ...(plotData.layout.title || {}),
+                        ...(plotData.layout.title || {}),
                         x: 0.5,
                         xanchor: 'center',
-                        //yanchor: 'top',
-                        //pad: {t: 10},
-                        //font: {size: 20},
-                        //subtitle: {
-                            //text: (plotData.layout.title.subtitle && plotData.layout.title.subtitle.text) ? plotData.layout.title.subtitle.text : (typeof plotData.layout.title.subtitle === 'string' ? plotData.layout.title.subtitle : ""),
-                            //font: {size: 20},
-                        //},
                     },
-                    //margin: {
-                        //t: 80, // Espaço para título maior
-                        //b: 80,  // Espaço para colorbar horizontal
-                        //l: 70,
-                        //r: 70,
-                        //pad: 0,
-                    //},                        
-                    //autosize: true, // Enable Plotly's internal autosizing based on container dimensions
-                    //width: null,    // Explicitly nullify width to allow CSS/container to dictate it
-                    //height: null,   // Explicitly nullify height to allow CSS/container to dictate it
-                    //xaxis: {
-                        //...(plotData.layout.xaxis || {}), // Preserves existing X-axis properties
-                        //constrain: 'domain',         // Optional: Constrain axis range to plot's domain
-                    //},
-                    //yaxis: {
-                        //...(plotData.layout.yaxis || {}), // Preserves existing Y-axis properties
-                    //},
                 };
-                
-                // Configuration for Plotly rendering, enabling full responsiveness
+
+                // Configuração de renderização do Plotly
                 const config = {
-                    responsive: false,     // Makes the plot responsive to window resizing
-                    displayModeBar: true, // Optional: Hides the Plotly toolbar for a cleaner user experience
+                    responsive: false,    // Desabilitado de propósito (problemas a tratar depois)
+                    displayModeBar: true, // Mantém a barra de ferramentas do Plotly
                     displaylogo: false,   // Remove o ícone do Plotly para limpar a UI
                     toImageButtonOptions: {scale: 2} // Alta resolução
                         
@@ -185,8 +139,23 @@
             });
     }
 
+    // Atualiza dateModified do JSON-LD para a data atual (os gráficos são
+    // buscados ao vivo da Cloud Function, então o conteúdo reflete o dado mais recente)
+    function updateJsonLdDate() {
+        const el = document.getElementById('report-jsonld');
+        if (!el) return;
+        try {
+            const data = JSON.parse(el.textContent);
+            data.dateModified = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+            el.textContent = JSON.stringify(data, null, 2);
+        } catch (e) {
+            console.error('Falha ao atualizar dateModified do JSON-LD:', e);
+        }
+    }
+
     // Inicializa com os gráficos mensais ao carregar a página
     document.addEventListener('DOMContentLoaded', () => {
+        updateJsonLdDate();
         loadNewCharts('mensal');
 
         // Top 10 servido pela Cloud Function (independe do seletor mensal/ytd)
