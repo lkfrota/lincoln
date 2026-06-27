@@ -126,9 +126,13 @@
 
                 // Remove any existing plot before creating a new one to prevent potential issues
                 // with Plotly.newPlot when an element already contains a plot.
-                if (container.__plotly_editor_children) { 
+                if (container.__plotly_editor_children) {
                     Plotly.purge(containerId);
                 }
+
+                // Limpa o placeholder "Carregando..." (newPlot só remove conteúdo
+                // Plotly, não HTML arbitrário) para não sobrar resíduo abaixo do gráfico
+                container.innerHTML = '';
 
                 // Render the new plot with updated layout and configuration
                 Plotly.newPlot(containerId, plotData.data, updatedLayout, config);
