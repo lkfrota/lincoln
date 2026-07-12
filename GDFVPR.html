@@ -74,9 +74,11 @@
     const mqNarrow = window.matchMedia('(max-width: 949px)');
     const mqCoarse = window.matchMedia('(pointer: coarse)'); // tela de toque
 
-    // Tamanho base do Top 10 no modo estreito (antes da escala CSS)
+    // Tamanho base do Top 10 no modo estreito (antes da escala CSS) e o quanto
+    // ele pode encolher no máximo — abaixo disso ganha rolagem lateral
     const TOP10_BASE_W = 840;
     const TOP10_BASE_H = 650;
+    const TOP10_MIN_SCALE = 0.7;
 
     // Cache dos JSONs já baixados: alternar mensal/ytd ou girar a tela não refaz o fetch
     const chartCache = new Map();     // chartType -> figura Plotly (objeto)
@@ -194,29 +196,46 @@
     }
 
     // Encolhimento proporcional do Top 10: transform: scale() não afeta o layout da
-    // página, então o wrapper recebe a altura visual e esconde a sobra do box original
+    // página, então o "sizer" recebe o tamanho visual e delimita a área de rolagem.
+    // Se nem no piso de escala couber, o wrapper rola na horizontal como os mapas.
     function applyTop10Scale(narrow) {
         const container = document.getElementById(TOP10_CONTAINER_ID);
         const wrapper = document.getElementById('top10-scale-wrapper');
-        if (!container || !wrapper) return;
+        const sizer = document.getElementById('top10-scale-sizer');
+        const hint = document.getElementById('top10-scroll-hint');
+        if (!container || !wrapper || !sizer) return;
 
         if (!narrow) {
             container.style.transform = '';
             container.style.transformOrigin = '';
             container.style.width = '';
-            wrapper.style.height = '';
+            sizer.style.width = '';
+            sizer.style.height = '';
+            if (hint) hint.classList.add('hidden');
             return;
         }
 
-        const factor = Math.min(1, wrapper.clientWidth / TOP10_BASE_W);
+        const fit = wrapper.clientWidth / TOP10_BASE_W;
+        const factor = Math.min(1, Math.max(fit, TOP10_MIN_SCALE));
         container.style.width = TOP10_BASE_W + 'px';
         container.style.transformOrigin = 'top left';
         container.style.transform = `scale(${factor})`;
-        wrapper.style.height = Math.ceil(TOP10_BASE_H * factor) + 'px';
+        sizer.style.width = Math.ceil(TOP10_BASE_W * factor) + 'px';
+        sizer.style.height = Math.ceil(TOP10_BASE_H * factor) + 'px';
+        // dica de deslizar só quando o gráfico ficou maior que a tela
+        if (hint) hint.classList.toggle('hidden', factor <= fit);
+    }
+
+    // Aviso "recursos interativos só em tela grande": aparece quando os gráficos
+    // estão no modo estático (tela estreita + toque)
+    function updateInteractivityNote() {
+        const note = document.getElementById('interactive-note');
+        if (note) note.classList.toggle('hidden', !(mqNarrow.matches && mqCoarse.matches));
     }
 
     // Cruzou o breakpoint (ex.: girou o tablet): re-renderiza tudo a partir do cache
     mqNarrow.addEventListener('change', () => {
+        updateInteractivityNote();
         for (const [containerId, chartType] of renderedCharts) {
             renderChart(chartType, containerId);
         }
@@ -247,6 +266,7 @@
     // Inicializa com os gráficos mensais ao carregar a página
     document.addEventListener('DOMContentLoaded', () => {
         updateJsonLdDate();
+        updateInteractivityNote();
         loadNewCharts('mensal');
 
         // Top 10 servido pela Cloud Function (independe do seletor mensal/ytd)
@@ -284,6 +304,9 @@
                         <option value="ytd">Acumulada (Acumulado Ano vs. Histórico/Anterior)</option>
                     </select>
                 </div>
+                <p id="interactive-note" class="hidden text-sm text-slate-500 italic -mt-4 mb-8">
+                    Recursos interativos dos gráficos disponíveis somente em tela grande.
+                </p>
                 <!-- Aqui o primeiro mapa -->
                 <figure class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white relative">
                     <div class="overflow-x-auto overscroll-x-contain">
@@ -319,11 +342,14 @@
             </div>
             <div class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
                 <figure class="m-0">
-                    <div id="top10-scale-wrapper" class="overflow-hidden">
-                        <div id="top10-container" class="min-h-[650px]">
-                            <!-- Gráfico Plotly do Top 10 renderizado aqui pela Cloud Function -->
+                    <div id="top10-scale-wrapper" class="overflow-x-auto overscroll-x-contain">
+                        <div id="top10-scale-sizer" class="overflow-hidden">
+                            <div id="top10-container" class="min-h-[650px]">
+                                <!-- Gráfico Plotly do Top 10 renderizado aqui pela Cloud Function -->
+                            </div>
                         </div>
                     </div>
+                    <p id="top10-scroll-hint" class="hidden text-xs text-slate-400 text-center py-1 bg-white">Deslize para o lado para ver o gráfico completo →</p>
                     <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
                         Gráfico: Evolução 24 Meses Top 10 Municípios com Geração Distribuída no Paraná.
                     </figcaption>
