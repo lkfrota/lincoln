@@ -74,11 +74,13 @@
     const mqNarrow = window.matchMedia('(max-width: 949px)');
     const mqCoarse = window.matchMedia('(pointer: coarse)'); // tela de toque
 
-    // Tamanho base do Top 10 no modo estreito (antes da escala CSS) e o quanto
-    // ele pode encolher no máximo — abaixo disso ganha rolagem lateral
+    // Tamanhos base dos gráficos no modo estreito (antes da escala CSS) e o quanto
+    // podem encolher no máximo — abaixo do piso ganham rolagem lateral
     const TOP10_BASE_W = 840;
     const TOP10_BASE_H = 650;
-    const TOP10_MIN_SCALE = 0.7;
+    const MAP_BASE_W = 840;   // fixados pela Cloud Function (layout dos mapas GHI)
+    const MAP_BASE_H = 784;
+    const CHART_MIN_SCALE = 0.7;
 
     // Cache dos JSONs já baixados: alternar mensal/ytd ou girar a tela não refaz o fetch
     const chartCache = new Map();     // chartType -> figura Plotly (objeto)
@@ -192,6 +194,8 @@
 
         if (chartType === 'top10_bar') {
             applyTop10Scale(narrow);
+        } else {
+            applyMapScale(containerId);
         }
     }
 
@@ -216,7 +220,7 @@
         }
 
         const fit = wrapper.clientWidth / TOP10_BASE_W;
-        const factor = Math.min(1, Math.max(fit, TOP10_MIN_SCALE));
+        const factor = Math.min(1, Math.max(fit, CHART_MIN_SCALE));
         container.style.width = TOP10_BASE_W + 'px';
         container.style.transformOrigin = 'top left';
         container.style.transform = `scale(${factor})`;
@@ -224,6 +228,39 @@
         sizer.style.height = Math.ceil(TOP10_BASE_H * factor) + 'px';
         // dica de deslizar só quando o gráfico ficou maior que a tela
         if (hint) hint.classList.toggle('hidden', factor <= fit);
+    }
+
+    // No modo estático (tela estreita + toque) os mapas encolhem como o Top 10:
+    // scale() do SVG inteiro, então bolhas, fontes e contornos reduzem na mesma
+    // proporção (sem deformar). No modo interativo (mouse) seguem nos 840px com
+    // rolagem horizontal, como antes — o hover do Plotly não convive bem com transform.
+    function applyMapScale(containerId) {
+        const prefix = containerId.replace('-container', '');
+        const container = document.getElementById(containerId);
+        const sizer = document.getElementById(prefix + '-scale-sizer');
+        const hint = document.getElementById(prefix + '-scroll-hint');
+        if (!container || !sizer) return;
+        const wrapper = sizer.parentElement;
+
+        if (!(mqNarrow.matches && mqCoarse.matches)) {
+            container.style.transform = '';
+            container.style.transformOrigin = '';
+            sizer.style.width = '';
+            sizer.style.height = '';
+            sizer.style.overflow = '';
+            if (hint) hint.style.display = ''; // volta ao controle do CSS
+            return;
+        }
+
+        const fit = wrapper.clientWidth / MAP_BASE_W;
+        const factor = Math.min(1, Math.max(fit, CHART_MIN_SCALE));
+        container.style.transformOrigin = 'top left';
+        container.style.transform = `scale(${factor})`;
+        // o sizer delimita a área visual (transform não altera o layout box)
+        sizer.style.width = Math.ceil(MAP_BASE_W * factor) + 'px';
+        sizer.style.height = Math.ceil(MAP_BASE_H * factor) + 'px';
+        sizer.style.overflow = 'hidden';
+        if (hint) hint.style.display = (factor <= fit) ? 'none' : '';
     }
 
     // Aviso "recursos interativos só em tela grande": aparece quando os gráficos
@@ -242,10 +279,13 @@
     });
 
     // Dentro do modo estreito a largura ainda varia (rotação do celular):
-    // só recalcular a escala do Top 10, sem re-render
+    // só recalcular as escalas, sem re-render
     window.addEventListener('resize', () => {
         if (renderedCharts.get(TOP10_CONTAINER_ID)) {
             applyTop10Scale(mqNarrow.matches);
+        }
+        for (const id of [CLIM_CONTAINER_ID, PREV_CONTAINER_ID]) {
+            if (renderedCharts.get(id)) applyMapScale(id);
         }
     });
 
@@ -310,11 +350,13 @@
                 <!-- Aqui o primeiro mapa -->
                 <figure class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white relative">
                     <div class="overflow-x-auto overscroll-x-contain">
-                        <div id="mapa-clim-container" class="min-h-[668px] w-[840px]">
-                            <!-- Plotly content will be rendered here, replacing initial loading text -->
+                        <div id="mapa-clim-scale-sizer">
+                            <div id="mapa-clim-container" class="min-h-[668px] w-[840px]">
+                                <!-- Plotly content will be rendered here, replacing initial loading text -->
+                            </div>
                         </div>
                     </div>
-                    <p class="hidden max-[949px]:block text-xs text-slate-400 text-center py-1 bg-white">Deslize para o lado para ver o mapa completo →</p>
+                    <p id="mapa-clim-scroll-hint" class="hidden max-[949px]:block text-xs text-slate-400 text-center py-1 bg-white">Deslize para o lado para ver o mapa completo →</p>
                     <figcaption class="p-4 text-center text-sm text-slate-500 bg-white">
                         Mapa da Irradiação Solar (GHI) - Relativo à Média Longa.
                     </figcaption>
@@ -322,11 +364,13 @@
                 <!-- Aqui o segundo mapa -->
                 <figure class="w-full max-w-4xl mx-auto mt-8 rounded-2xl shadow-2xl overflow-hidden border-4 border-white relative">
                     <div class="overflow-x-auto overscroll-x-contain">
-                        <div id="mapa-prev-container" class="min-h-[668px] w-[840px]">
-                            <!-- Plotly content will be rendered here, replacing initial loading text -->
+                        <div id="mapa-prev-scale-sizer">
+                            <div id="mapa-prev-container" class="min-h-[668px] w-[840px]">
+                                <!-- Plotly content will be rendered here, replacing initial loading text -->
+                            </div>
                         </div>
                     </div>
-                    <p class="hidden max-[949px]:block text-xs text-slate-400 text-center py-1 bg-white">Deslize para o lado para ver o mapa completo →</p>
+                    <p id="mapa-prev-scroll-hint" class="hidden max-[949px]:block text-xs text-slate-400 text-center py-1 bg-white">Deslize para o lado para ver o mapa completo →</p>
                     <figcaption class="p-4 text-center text-sm text-slate-500 bg-white w-full max-w-4xl mx-auto">
                         Irradiação Solar (GHI) no Paraná - Relativo ao Mesmo período do Ano Passado.
                     </figcaption>
