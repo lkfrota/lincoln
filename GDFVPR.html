@@ -159,6 +159,21 @@
             },
         };
 
+        if (chartType === 'top10_bar') {
+            // Marca Frota Solar, como nos mapas (mesma imagem e proporção)
+            updatedLayout.images = [{
+                source: 'https://github.com/lkfrota/lincoln/blob/main/logoenome.png?raw=true',
+                xref: 'paper', yref: 'paper',
+                x: 0.02, y: 0.97, xanchor: 'left', yanchor: 'top',
+                sizex: 0.22, sizey: 0.22,
+            }];
+            // Trava o zoom (arrastar caixa / duplo clique), mantendo o hover
+            updatedLayout.xaxis = { ...(fig.layout.xaxis || {}), fixedrange: true };
+            updatedLayout.yaxis = { ...(fig.layout.yaxis || {}), fixedrange: true };
+            // Hover com 1 casa decimal
+            fig.data.forEach(trace => { trace.yhoverformat = '.1f'; });
+        }
+
         // Top 10 em tela estreita: renderiza em tamanho fixo e depois encolhe o SVG
         // inteiro via transform (fontes, margens e rótulos mantêm as proporções)
         if (chartType === 'top10_bar' && narrow) {
