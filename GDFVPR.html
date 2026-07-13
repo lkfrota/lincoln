@@ -170,8 +170,11 @@
             // Trava o zoom (arrastar caixa / duplo clique), mantendo o hover
             updatedLayout.xaxis = { ...(fig.layout.xaxis || {}), fixedrange: true };
             updatedLayout.yaxis = { ...(fig.layout.yaxis || {}), fixedrange: true };
-            // Hover com 1 casa decimal
-            fig.data.forEach(trace => { trace.yhoverformat = '.1f'; });
+            // Hover com 1 casa decimal e data numérica (mm/aaaa)
+            fig.data.forEach(trace => {
+                trace.yhoverformat = '.1f';
+                trace.xhoverformat = '%m/%Y';
+            });
         }
 
         // Top 10 em tela estreita: renderiza em tamanho fixo e depois encolhe o SVG
