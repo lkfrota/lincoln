@@ -162,7 +162,7 @@
         if (chartType === 'top10_bar') {
             // Marca Frota Solar, como nos mapas (mesma imagem e proporção)
             updatedLayout.images = [{
-                source: 'https://github.com/lkfrota/lincoln/blob/main/logoenome.png?raw=true',
+                source: 'logoenome.png',
                 xref: 'paper', yref: 'paper',
                 x: 0.02, y: 0.97, xanchor: 'left', yanchor: 'top',
                 sizex: 0.22, sizey: 0.22,
@@ -175,6 +175,12 @@
                 trace.yhoverformat = '.1f';
                 trace.xhoverformat = '%m/%Y';
             });
+        }
+
+        // Logo servido pelo próprio site: o endereço que vem da Cloud Function
+        // (github.com com redirect) não carrega em alguns navegadores de celular
+        if (Array.isArray(updatedLayout.images)) {
+            updatedLayout.images = updatedLayout.images.map(img => ({ ...img, source: 'logoenome.png' }));
         }
 
         // Top 10 em tela estreita: renderiza em tamanho fixo e depois encolhe o SVG
