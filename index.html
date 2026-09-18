@@ -126,7 +126,7 @@
                 Líder de Confiabilidade e Otimização, Elevando a Disponibilidade e a Performance de Ativos com Inovação
             </p>
             <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-                 <a href="ENG_LINCOLN_K_FROTA.pdf" download="ENG_LINCOLN_K_FROTA.pdf" class="action-button inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-10 rounded-lg shadow-lg text-xl" data-i18n-key="cv_btn_download_home">
+                 <a href="ENG_LINCOLN_K_FROTA.pdf" target="_blank" rel="noopener" class="action-button inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-10 rounded-lg shadow-lg text-xl" data-i18n-key="cv_btn_download_home">
                     <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     Baixar Currículo em PDF
                 </a>
@@ -204,7 +204,7 @@
     
     <footer class="bg-slate-800 text-slate-400 py-8">
         <div class="container mx-auto px-6 text-center">
-            <p data-i18n-key="footer_copyright">&copy; 2025 Lincoln K. Frota. Todos os direitos reservados.</p>
+            <p data-i18n-key="footer_copyright">&copy; <span id="footer-year"></span> Lincoln K. Frota. Todos os direitos reservados.</p>
             <p class="text-sm mt-2" data-i18n-key="footer_desc">Página interativa desenvolvida para apresentação profissional.</p>
         </div>
     </footer>
@@ -224,7 +224,7 @@
                 'home_title': 'Lincoln K. Frota',
                 'home_subtitle': 'Líder de Confiabilidade e Otimização, Elevando a Disponibilidade e a Performance de Ativos com Inovação',
                 'home_intro': 'Bem-vindo à minha página de apresentação profissional. Para conhecer minha trajetória, competências e projetos, faça o download do meu currículo acima.',
-                'cv_btn_download_home': 'Baixar Currículo em PDF',
+                'cv_btn_download_home': 'Ver Currículo em PDF',
                 'chat_btn_home': 'Entreviste meu Histórico',
                 'home_chat_call_to_action': 'Faça uma entrevista imediata com meu Agente de IA! Ele pode consultar meu histórico completo e responder suas perguntas.',
                 'home_cv_summary': 'Com cerca de 20 anos de experiência em operações nas indústrias de manufatura, energia solar e óleo e gás, atuo como Engenheiro de Performance e Confiabilidade Industrial e Especialista em PCM. Minhas realizações incluem a melhoria de processos que resultaram em alta disponibilidade e redução de falhas, liderança na estruturação de operações e inovação em projetos de campo. Sou reconhecido pela minha abordagem analítica e capacidade de transformar desafios em resultados tangíveis, utilizando análises de dados e agora também inteligência artificial.',
@@ -243,7 +243,7 @@
                 'chat_section_intro': 'Para uma exploração interativa da minha carreira, desenvolvi um agente de IA. Você pode perguntar sobre experiências específicas, projetos, habilidades técnicas e histórias profissionais. O chat abaixo é uma forma direta de obter respostas detalhadas e personalizadas com base em todo o meu histórico. Caso ele não saiba a resposta, deixe seu nome e contato que ele me informará da sua pergunta e eu terei o maior prazer em responder.',
                 'disclaimer_llm_accuracy': '**Disclaimer sobre a IA:** Este assistente é um modelo de linguagem e, embora provido com somente o histórico profissional de Lincoln K. Frota e configurado para ser factual, pode, ocasionalmente, gerar informações imprecisas ou não corroboradas. Para detalhes completos e endossados, por favor, consulte o currículo em PDF ou o próprio profissional.',
                 'disclaimer_data_privacy': '**Privacidade de Dados:** Caso você opte por fornecer seus dados de contato através deste chat, eles serão utilizados somente por Lincoln K. Frota estritamente para o propósito de retorno ao seu contato. Ele não armazenará ou compartilhará seus dados para quaisquer outras finalidades.',
-                'footer_copyright': '&copy; 2025 Lincoln K. Frota. Todos os direitos reservados.',
+                'footer_copyright': '&copy; <span id="footer-year"></span> Lincoln K. Frota. Todos os direitos reservados.',
                 'footer_desc': 'Página interativa desenvolvida para apresentação profissional.',
                 'iframe_title': 'Chat com Agente de IA sobre Histórico Profissional de Lincoln',
                 'whatsapp_message': 'Ol%C3%A1,%20visitei%20seu%20site%20de%20carreira%20e%20gostaria%20de%20conversar!'
@@ -253,7 +253,7 @@
                 'home_title': 'Lincoln K. Frota',
                 'home_subtitle': 'Reliability and Optimization Leader, Driving Asset Performance and Availability through Innovation',
                 'home_intro': 'Welcome to my professional presentation page. To learn about my career, skills, and projects, download my resume above.',
-                'cv_btn_download_home': 'Download Resume PDF',
+                'cv_btn_download_home': 'View Resume PDF',
                 'chat_btn_home': 'Interview my History',
                 'home_chat_call_to_action': 'Have an immediate interview with my AI Agent! It can consult my complete history and answer your questions.',
                 'home_cv_summary': 'With nearly 20 years of experience in operations across manufacturing, solar energy, and oil & gas industries, I serve as a Performance and Industrial Reliability Engineer and Maintenance Specialist. My achievements include process improvements resulting in high availability and fault reduction, leading operational structuring and innovation in field projects. I am recognized for my analytical approach and ability to transform challenges into tangible results, leveraging data analysis and now also artificial intelligence.',
@@ -272,7 +272,7 @@
                 'chat_section_intro': 'For an interactive exploration of my career, I developed an AI agent. You can ask about specific experiences, projects, technical skills, and professional stories. The chat below is a direct way to get detailed and personalized answers based on my entire history. If it doesn\'t know the answer, leave your name and contact and it will inform me of your question, and I will be happy to answer.',
                 'disclaimer_llm_accuracy': '**AI Disclaimer:** This assistant is a language model, and while provided with only Lincoln K. Frota\'s professional history and configured to be factual, it may occasionally generate inaccurate or uncorroborated information. For complete and endorsed details, please refer to the PDF resume or the professional himself.',
                 'disclaimer_data_privacy': '**Data Privacy:** Should you choose to provide your contact details through this chat, they will be used solely by Lincoln K. Frota strictly for the purpose of returning your contact. He will not store or share your data for any other purposes.',
-                'footer_copyright': '&copy; 2025 Lincoln K. Frota. All rights reserved.',
+                'footer_copyright': '&copy; <span id="footer-year"></span> Lincoln K. Frota. All rights reserved.',
                 'footer_desc': 'Interactive page developed for professional presentation.',
                 'iframe_title': 'Chat with AI Agent about Lincoln\'s Professional History',
                 'whatsapp_message': 'Hello,%20I%20visited%20your%20career%20website%20and%20would%20like%20to%20chat!'
@@ -287,16 +287,22 @@
                 }
             });
 
+            const footerYearSpan = document.getElementById('footer-year');
+            if (footerYearSpan) {
+                footerYearSpan.textContent = new Date().getFullYear();
+            }
+
             const cvDownloadButtonHome = document.querySelector('[data-i18n-key="cv_btn_download_home"]');
             if (cvDownloadButtonHome) {
                 cvDownloadButtonHome.innerHTML = `<svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>${translations[lang]['cv_btn_download_home']}`;
-                // Set the href for the CV download button dynamically based on language
+                // Define o href do botão do currículo por idioma, abrindo em nova aba (sem forçar download)
+                cvDownloadButtonHome.removeAttribute('download');
+                cvDownloadButtonHome.setAttribute('target', '_blank');
+                cvDownloadButtonHome.setAttribute('rel', 'noopener');
                 if (lang === 'en') {
                     cvDownloadButtonHome.setAttribute('href', 'ENG_LINCOLN_K_FROTA_EN.pdf');
-                    cvDownloadButtonHome.setAttribute('download', 'ENG_LINCOLN_K_FROTA_Resume.pdf'); // Changed to match your current code
                 } else {
                     cvDownloadButtonHome.setAttribute('href', 'ENG_LINCOLN_K_FROTA.pdf');
-                    cvDownloadButtonHome.setAttribute('download', 'ENG_LINCOLN_K_FROTA.pdf'); // Changed to match your current code
                 }
             }
 
