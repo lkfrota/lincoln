@@ -281,6 +281,7 @@
 
         function setLanguage(lang) {
             document.querySelectorAll('[data-i18n-key]').forEach(element => {
+                if (element.tagName.toLowerCase() === 'gradio-app') return; // tratado abaixo: só o atributo title, nunca o innerHTML
                 const key = element.getAttribute('data-i18n-key');
                 if (translations[lang] && translations[lang][key]) {
                     element.innerHTML = translations[lang][key]; // Use innerHTML to allow <br> tags
@@ -339,13 +340,9 @@
                 const encodedMessage = translations[lang]['whatsapp_message'];
                 fixedWhatsappButton.setAttribute('href', `https://wa.me/${phoneNumber}?text=${encodedMessage}`);
             }
-            // CORREÇÃO: Seleciona o gradio-app <-- não está funcionando
-            const gradioAppElement = document.querySelector('gradio-app'); 
+            const gradioAppElement = document.querySelector('gradio-app');
             if (gradioAppElement) {
                 gradioAppElement.setAttribute('title', translations[lang]['iframe_title']);
-                // Força um re-render do iframe para resolver o problema da tela cinza
-                const currentSrc = gradioAppElement.getAttribute('src');
-                gradioAppElement.setAttribute('src', currentSrc); 
             }
 
             const langToggleBtn = document.getElementById('language-toggle');
